@@ -379,7 +379,10 @@ class _PostPageState extends State<PostPage> {
                     );
                     log(res.data.toString());
                     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      Navigator.pushNamed(context, '/licensor_broadcast');
+                      Navigator.pushNamed(
+                        context,
+                        '/licensor_broadcast',
+                      );
                     });
                   }
                 },

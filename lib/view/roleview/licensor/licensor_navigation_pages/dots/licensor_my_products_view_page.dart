@@ -75,6 +75,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemCount: productList.length,
                   itemBuilder: (context, i) {
                     return CardPost(
+                      HelpDelete: (id) {
+                        setState(() {
+                          productList
+                              .removeWhere((element) => element['id_product']);
+                        });
+                      },
                       id_product: '${productList[i]['id_product']}',
                       productname: '${productList[i]['name']}',
                       price: '${productList[i]['price']}',

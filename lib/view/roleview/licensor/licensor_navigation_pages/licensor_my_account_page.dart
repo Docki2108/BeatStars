@@ -55,9 +55,9 @@ class _myaccountState extends State<myaccount> {
                 IconButton(
                   onPressed: () {
                     UserModel().clear();
-
                     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      Navigator.pushNamed(context, '/');
+                      Navigator.pushReplacementNamed(context, '/',
+                          arguments: true);
                     });
                   },
                   color: Colors.white,

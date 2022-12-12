@@ -38,6 +38,7 @@ class products_view_page extends StatefulWidget {
 }
 
 class _products_view_pageState extends State<products_view_page> {
+  List<Map<String, dynamic>> productList = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,8 +77,10 @@ class _products_view_pageState extends State<products_view_page> {
       ),
       backgroundColor: color_soft_blue,
       body: FutureBuilder(
-        future: GRaphQLProvider.client
-            .query(QueryOptions(document: gql(productPost))),
+        future: GRaphQLProvider.client.query(
+          QueryOptions(
+              document: gql(productPost), fetchPolicy: FetchPolicy.networkOnly),
+        ),
         builder: (context, snapshot) {
           if (!snapshot.hasData || snapshot.data == null) {
             log('Загрузка товаров с API...');
@@ -95,13 +98,19 @@ class _products_view_pageState extends State<products_view_page> {
             log('Товары найдены');
             log(dateNow);
             // log(snapshot.data.toString());
-            var productList = (((snapshot.data as QueryResult).data
+            productList = (((snapshot.data as QueryResult).data
                     as Map<String, dynamic>)['product'] as List<Object?>)
                 .cast<Map<String, dynamic>>();
             return ListView.builder(
               itemCount: productList.length,
               itemBuilder: (context, i) {
                 return CardPost(
+                  HelpDelete: (id) {
+                    setState(() {
+                      productList.removeWhere(
+                          (element) => element['id_product'] == id);
+                    });
+                  },
                   id_product: '${productList[i]['id_product']}',
                   productname: '${productList[i]['name']}',
                   price: '${productList[i]['price']}',

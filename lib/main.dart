@@ -60,11 +60,10 @@ TextEditingController passwordController = TextEditingController();
 
 class _HomePageState extends State<HomePage> {
   Future<QueryResult> sendQuerry(String login, String password) =>
-      GRaphQLProvider.client.mutate(
-        MutationOptions(
-            document: gql(authMutation),
-            variables: {'p_login': login, 'p_password': password}),
-      );
+      GRaphQLProvider.client.mutate(MutationOptions(
+          document: gql(authMutation),
+          variables: {'p_login': login, 'p_password': password},
+          fetchPolicy: FetchPolicy.networkOnly));
 
   Future<QueryResult<Object?>>? querryToSet;
   HasuraConnect hasuraConnect = HasuraConnect(GRAPHQL_LINK);
@@ -264,6 +263,7 @@ class _HomePageState extends State<HomePage> {
                     child: FutureBuilder(
                         future: querryToSet,
                         builder: (context, snapshot) {
+                          log(querryToSet.toString());
                           if (snapshot.hasData) {
                             log('Авторизация...');
                             var authdata = (snapshot.data as QueryResult).data;
@@ -298,7 +298,7 @@ class _HomePageState extends State<HomePage> {
                                     );
                                     WidgetsBinding.instance
                                         .addPostFrameCallback((_) {
-                                      Navigator.pushNamed(
+                                      Navigator.pushReplacementNamed(
                                           context, '/admin_broadcast');
                                     });
                                     break;
@@ -310,7 +310,7 @@ class _HomePageState extends State<HomePage> {
                                     );
                                     WidgetsBinding.instance
                                         .addPostFrameCallback((_) {
-                                      Navigator.pushNamed(
+                                      Navigator.pushReplacementNamed(
                                           context, '/client_broadcast');
                                     });
                                     break;
@@ -323,7 +323,7 @@ class _HomePageState extends State<HomePage> {
                                     );
                                     WidgetsBinding.instance
                                         .addPostFrameCallback((_) {
-                                      Navigator.pushNamed(
+                                      Navigator.pushReplacementNamed(
                                           context, '/operator_broadcast');
                                     });
                                     break;
@@ -338,7 +338,7 @@ class _HomePageState extends State<HomePage> {
                                     // passwordController.clear();
                                     WidgetsBinding.instance
                                         .addPostFrameCallback((_) {
-                                      Navigator.pushNamed(
+                                      Navigator.pushReplacementNamed(
                                           context, '/licensor_broadcast');
                                     });
                                     break;
@@ -356,7 +356,6 @@ class _HomePageState extends State<HomePage> {
                               }
                             }
                           }
-
                           return ElevatedButton(
                             onPressed: () {
                               if (passwordController.text.isEmpty ||

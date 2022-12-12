@@ -7,6 +7,9 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:beat/theme/colors.dart';
 import '../../../main.dart';
 import '../licensor/licensor_navigation_pages/licensor_my_activity_page.dart';
+import 'admin_my_account_page.dart';
+import 'admin_products_view_page.dart';
+import 'admin_review_page.dart';
 
 main() {
   runApp(
@@ -31,59 +34,147 @@ class admin_broadcast extends StatefulWidget {
 
 int currentIndex = 0;
 final screens = [
-  // client_products_view_page(),
-  // client_my_activity_page(),
-  // client_my_account_page()
+  admin_users_page(),
 ];
+final PageStorageBucket bucket = PageStorageBucket();
+Widget currentScreen = admin_users_page();
 
 class _admin_broadcastState extends State<admin_broadcast> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: color_soft_blue,
-      body: screens[currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        iconSize: 32,
-        enableFeedback: true,
-        backgroundColor: color_blue,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Color.fromARGB(255, 25, 81, 127),
-        type: BottomNavigationBarType.fixed,
-        currentIndex: currentIndex,
-        onTap: (index) => setState(() => currentIndex = index),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.wysiwyg, color: Colors.blue),
-            label: 'Товары',
+      body: PageStorage(
+        child: currentScreen,
+        bucket: bucket,
+      ),
+      // floatingActionButton: FloatingActionButton(
+      //   child: Icon(Icons.add),
+      //   onPressed: () {},
+      // ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //bottomSheet: Text('ds'),
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 10,
+        child: Container(
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = admin_users_page();
+                        currentIndex = 0;
+                      });
+                    },
+                    minWidth: 40,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.wysiwyg,
+                          color: currentIndex == 0 ? Colors.blue : Colors.grey,
+                        ),
+                        Text(
+                          'Пользователи',
+                          style: TextStyle(
+                            color:
+                                currentIndex == 0 ? Colors.blue : Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  MaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = admin_products_view_page();
+                        currentIndex = 0;
+                      });
+                    },
+                    minWidth: 40,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.wysiwyg,
+                          color: currentIndex == 0 ? Colors.blue : Colors.grey,
+                        ),
+                        Text(
+                          'Товары',
+                          style: TextStyle(
+                            color:
+                                currentIndex == 0 ? Colors.blue : Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = admin_my_account_page();
+                        currentIndex = 0;
+                      });
+                    },
+                    minWidth: 40,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.dashboard,
+                          color: currentIndex == 0 ? Colors.blue : Colors.grey,
+                        ),
+                        Text(
+                          'Мой аккаунт',
+                          style: TextStyle(
+                            color:
+                                currentIndex == 0 ? Colors.blue : Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  // MaterialButton(
+                  //   onPressed: () {
+                  //     setState(() {
+                  //       currentScreen = client_my_account_page();
+                  //       currentIndex = 0;
+                  //     });
+                  //   },
+                  //   minWidth: 40,
+                  //   child: Column(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       Icon(
+                  //         Icons.account_box,
+                  //         color: currentIndex == 0 ? Colors.blue : Colors.grey,
+                  //       ),
+                  //       Text(
+                  //         'Мой аккаунт',
+                  //         style: TextStyle(
+                  //           color:
+                  //               currentIndex == 0 ? Colors.blue : Colors.grey,
+                  //         ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
+                ],
+              )
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.table_rows_outlined, color: Colors.blue),
-            label: 'лицензии*(моя деятельность)',
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_box, color: Colors.blue),
-              label: 'Личный кабинет',
-              backgroundColor: color_soft_blue),
-        ],
+        ),
       ),
     );
   }
-
-  // Widget dotsview() {
-  //   return SingleChildScrollView(
-  //     scrollDirection: Axis.vertical,
-  //     child: ConstrainedBox(
-  //       constraints: BoxConstraints(
-  //         minWidth: 150,
-  //         minHeight: 150,
-  //         maxWidth: MediaQuery.of(context).size.width,
-  //         maxHeight: MediaQuery.of(context).size.height * 0.815,
-  //       ),
-  //       child: PageView(
-  //         controller: _controller,
-  //         children: const [TodayPage(), TomorrowPage(), DayAfterPage()],
-  //       ),
-  //     ),
-  //   );
-  // }
 }

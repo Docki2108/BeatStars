@@ -98,7 +98,7 @@ class _client_products_view_pageState extends State<client_products_view_page> {
                 return ListView.builder(
                   itemCount: productList.length,
                   itemBuilder: (context, i) {
-                    return CardPost(
+                    return CardPostforClient(
                         id_product: '${productList[i]['id_product']}',
                         productname: '${productList[i]['name']}',
                         price: '${productList[i]['price']}',

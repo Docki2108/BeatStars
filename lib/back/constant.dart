@@ -37,6 +37,36 @@ const String productPost = r'''
 }
 ''';
 
+const String licensorsPost = r'''query licensorsPost {
+  licensor {
+    id_licensor
+    info
+    login
+    mail
+    name
+    passport_number
+    passport_series
+    password
+    patronymic
+    surname
+  }
+}''';
+
+const String clientsPost = r'''query clientsPost {
+  client {
+    id_client
+    login
+    mail
+    name
+    passport_number
+    passport_series
+    password
+    patronymic
+    surname
+    telephone
+  }
+}''';
+
 const String licencePost = r'''query licensePost {
   license {
     info
@@ -56,9 +86,21 @@ const String productInsert =
   insert_product(objects: {bpm: $bpm, duration: $duration, genre: $genre, image: $image, info: $info, key: $key, music: $music, name: $name, price: $price, publish_date: $publish_date, licensor_id: $licensor_id}) {
     returning {
       name
+      bpm
+      duration
+      genre
+      id_product
+      image
+      info
+      key
+      music
+      price
+      publish_date
+      licensor_id
     }
   }
-}''';
+}
+''';
 
 const String productDelete = r'''mutation MyMutation($id_product: Int = 10) {
   delete_product(where: {id_product: {_eq: $id_product}, music: {}}) {
@@ -80,10 +122,77 @@ const String productDelete = r'''mutation MyMutation($id_product: Int = 10) {
 }
 ''';
 
+const String licensorDelete =
+    r'''mutation licensorDelete($id_licensor: Int = 10) {
+  delete_licensor(where: {id_licensor: {_eq: $id_licensor}}) {
+    returning {
+      id_licensor
+      info
+      login
+      mail
+      name
+      passport_number
+      passport_series
+      password
+      patronymic
+      surname
+    }
+  }
+}''';
+
+const String clientDelete = r'''mutation clientDelete($id_client: Int = 10) {
+  delete_client(where: {id_client: {_eq: $id_client}}) {
+    returning {
+      id_client
+      login
+      mail
+      name
+      passport_number
+      passport_series
+      password
+      patronymic
+      surname
+      telephone
+    }
+  }
+}''';
+
 const String productUpdate =
     r'''mutation productUpdate($id_product: Int = 10, $name: String = "", $price: Int = 10, $key: String = "", $info: String = "", $genre: String = "", $duration: String = "", $bpm: Float = 1.5) {
   update_product_by_pk(pk_columns: {id_product: $id_product}, _set: {name: $name, price: $price, key: $key, info: $info, genre: $genre, duration: $duration, bpm: $bpm}) {
     name
+  }
+}''';
+
+const String clientUpdate =
+    r'''mutation clientUpdate($id_client: Int = 10, $login: String = "", $mail: String = "", $name: String = "", $passport_number: String = "", $passport_series: String = "", $password: bytea = "", $patronymic: String = "", $surname: String = "", $telephone: String = "") {
+  update_client_by_pk(pk_columns: {id_client: $id_client}, _set: {login: $login, mail: $mail, name: $name, passport_number: $passport_number, passport_series: $passport_series, password: $password, patronymic: $patronymic, surname: $surname, telephone: $telephone}) {
+    id_client
+    login
+    mail
+    name
+    passport_number
+    passport_series
+    password
+    patronymic
+    surname
+    telephone
+  }
+}''';
+
+const String licensorUpdate =
+    r'''mutation licensorUpdate($id_licensor: Int = 10, $info: String = "", $login: String = "", $mail: String = "", $name: String = "", $passport_number: String = "", $passport_series: String = "", $password: bytea = "", $patronymic: String = "", $surname: String = "") {
+  update_licensor_by_pk(pk_columns: {id_licensor: $id_licensor}, _set: {info: $info, login: $login, mail: $mail, name: $name, passport_number: $passport_number, passport_series: $passport_series, password: $password, patronymic: $patronymic, surname: $surname}) {
+    id_licensor
+    info
+    login
+    mail
+    name
+    passport_number
+    passport_series
+    password
+    patronymic
+    surname
   }
 }''';
 

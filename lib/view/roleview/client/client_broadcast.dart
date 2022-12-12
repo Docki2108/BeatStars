@@ -1,12 +1,6 @@
-import 'package:beat/view/dots_view.dart';
-import 'package:beat/view/roleview/client/client_navigation_pages/client_my_account_pages.dart';
-import 'package:ferry/typed_links.dart';
 import 'package:flutter/material.dart';
-import 'package:graphql/client.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:beat/theme/colors.dart';
-import '../../../main.dart';
-import '../licensor/licensor_navigation_pages/licensor_my_activity_page.dart';
+import 'package:beat/view/roleview/client/client_navigation_pages/client_my_account_pages.dart';
 import 'client_navigation_pages/client_my_activity_page.dart';
 import 'client_navigation_pages/client_products_view_page.dart';
 
@@ -37,36 +31,143 @@ final screens = [
   client_my_activity_page(),
   client_my_account_page()
 ];
+final PageStorageBucket bucket = PageStorageBucket();
+Widget currentScreen = client_products_view_page();
 
 class _client_broadcastState extends State<client_broadcast> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: color_soft_blue,
-      body: screens[currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        iconSize: 32,
-        enableFeedback: true,
-        backgroundColor: color_blue,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Color.fromARGB(255, 25, 81, 127),
-        type: BottomNavigationBarType.fixed,
-        currentIndex: currentIndex,
-        onTap: (index) => setState(() => currentIndex = index),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.wysiwyg, color: Colors.blue),
-            label: 'Товары',
+      body: PageStorage(
+        child: currentScreen,
+        bucket: bucket,
+      ),
+      // floatingActionButton: FloatingActionButton(
+      //   child: Icon(Icons.add),
+      //   onPressed: () {},
+      // ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 10,
+        child: Container(
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = client_products_view_page();
+                        currentIndex = 0;
+                      });
+                    },
+                    minWidth: 40,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.wysiwyg,
+                          color: currentIndex == 0 ? Colors.blue : Colors.grey,
+                        ),
+                        Text(
+                          'Товары',
+                          style: TextStyle(
+                            color:
+                                currentIndex == 0 ? Colors.blue : Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  MaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = client_my_activity_page();
+                        currentIndex = 0;
+                      });
+                    },
+                    minWidth: 40,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.dashboard,
+                          color: currentIndex == 0 ? Colors.blue : Colors.grey,
+                        ),
+                        Text(
+                          'Мои товары',
+                          style: TextStyle(
+                            color:
+                                currentIndex == 0 ? Colors.blue : Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = client_my_account_page();
+                        currentIndex = 0;
+                      });
+                    },
+                    minWidth: 40,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.dashboard,
+                          color: currentIndex == 0 ? Colors.blue : Colors.grey,
+                        ),
+                        Text(
+                          '*',
+                          style: TextStyle(
+                            color:
+                                currentIndex == 0 ? Colors.blue : Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  MaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = client_my_account_page();
+                        currentIndex = 0;
+                      });
+                    },
+                    minWidth: 40,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.account_box,
+                          color: currentIndex == 0 ? Colors.blue : Colors.grey,
+                        ),
+                        Text(
+                          'Мой аккаунт',
+                          style: TextStyle(
+                            color:
+                                currentIndex == 0 ? Colors.blue : Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.table_rows_outlined, color: Colors.blue),
-            label: 'лицензии*(моя деятельность)',
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_box, color: Colors.blue),
-              label: 'Личный кабинет',
-              backgroundColor: color_soft_blue),
-        ],
+        ),
       ),
     );
   }
