@@ -6,7 +6,7 @@ import 'package:graphql/client.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:beat/theme/colors.dart';
 import '../../../main.dart';
-import '../../important_widgets/product_add__page.dart';
+import '../../important_widgets/product_add_page.dart';
 import 'licensor_navigation_pages/licensor_my_account_page.dart';
 import 'licensor_navigation_pages/licensor_products_view_page.dart';
 import 'licensor_navigation_pages/licensor_my_activity_page.dart';

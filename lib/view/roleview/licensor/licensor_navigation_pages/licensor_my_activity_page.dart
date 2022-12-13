@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:beat/back/graphql.dart';
 import 'package:beat/view/important_widgets/noproduct_widget.dart';
-import 'package:beat/view/important_widgets/product_add__page.dart';
+import 'package:beat/view/important_widgets/product_add_page.dart';
 import 'package:beat/view/important_widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

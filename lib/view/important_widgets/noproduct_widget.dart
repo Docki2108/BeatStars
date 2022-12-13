@@ -8,20 +8,20 @@ class NoProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 240),
-        Icon(
+        const SizedBox(height: 240),
+        const Icon(
           CupertinoIcons.square_stack_3d_up_slash,
           color: Colors.black38,
           size: 60,
         ),
-        SizedBox(height: 10),
-        Text(
+        const SizedBox(height: 10),
+        const Text(
           'Нет товаров',
           style: TextStyle(color: Colors.grey),
         ),
         CupertinoButton(
           onPressed: () {},
-          child: Text(
+          child: const Text(
             '+ Добавить',
             style: TextStyle(color: Colors.blue),
           ),

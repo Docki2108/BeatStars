@@ -59,7 +59,7 @@ TextEditingController loginController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
 
 class _HomePageState extends State<HomePage> {
-  Future<QueryResult> sendQuerry(String login, String password) =>
+  Future<QueryResult> auth(String login, String password) =>
       GRaphQLProvider.client.mutate(MutationOptions(
           document: gql(authMutation),
           variables: {'p_login': login, 'p_password': password},
@@ -368,7 +368,7 @@ class _HomePageState extends State<HomePage> {
                                 );
                               } else {
                                 setState(() {
-                                  querryToSet = sendQuerry(
+                                  querryToSet = auth(
                                       loginController.text.trim(),
                                       passwordController.text.trim());
                                 });

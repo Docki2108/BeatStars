@@ -9,63 +9,59 @@ environment:
   sdk: ">=2.17.5 <3.0.0"
 
 dependencies:
-  just_audio: 0.9.30
-  intl: ^0.17.0
-  cached_network_image: ^3.2.3
   audio_video_progress_bar: ^0.9.0
-  mask_text_input_formatter: ^2.4.0
+  audioplayers: ^1.1.1
+  cached_network_image: ^3.2.3
   cupertino_icons: ^1.0.2
-  ferry: 
+  extended_image: ^6.3.2
+  ferry: null
   ferry_flutter: ^0.6.2
-  get_it: ^7.2.0
-  flutter_slidable: ^2.0.0
-  gql_http_link:
-  hasura_connect:
-  uuid: ^3.0.7    
-  http: ^0.13.5
   flutter:
     sdk: flutter
+  flutter_slidable: ^2.0.0
+  gap: ^2.0.1
+  get_it: ^7.2.0
+  gql_http_link: null
   graphql: ^5.1.1
+  graphql_flutter: null
+  hasura_connect: null
+  http: ^0.13.5
+  intl: ^0.17.0
+  just_audio: 0.9.30
+  lottie: 2.0.0
+  mask_text_input_formatter: ^2.4.0
+  music: ^1.0.3
+  provider: ^6.0.4
+  rxdart: ^0.27.7
   smooth_page_indicator: ^1.0.0+2
   supabase_flutter: ^1.1.0
-  graphql_flutter: 
-  lottie: 2.0.0
-  audioplayers: ^1.1.1
-  extended_image: ^6.3.2
-  gap: ^2.0.1
-  provider: ^6.0.4
-  music: ^1.0.3
-  
+  uuid: ^3.0.7
+
 dev_dependencies:
-  flutter_lints: ^2.0.0
-  pedantic:
-  ferry_generator: ^0.6.1
   build_runner: ^2.3.2
+  ferry_generator: ^0.6.1
+  flutter_lints: ^2.0.0
 
   flutter_test:
     sdk: flutter
-
+  pedantic: null
 
 flutter:
   uses-material-design: true
-  
+
   assets:
     - lib/theme/images/
     - lib/theme/animation/
-    
 
 fonts:
   # - family: Roboto
   #   fonts:
   #     - asset: theme/fonts/Roboto-Regular.ttf
   #       weight: 400
-
   #     - asset: theme/fonts/Roboto-Italic.ttf
   #       style: italic
-
   #     - asset: theme/fonts/Roboto-Bold.ttf
   #       style: bold
-
   - family: RobotoMono
     fonts:
       - asset: theme\fonts\RobotoMono\RobotoMono-Regular.ttf

@@ -13,7 +13,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:beat/back/graphql.dart';
 import 'package:beat/theme/colors.dart';
 import 'package:beat/view/important_widgets/noproduct_widget.dart';
-import 'package:beat/view/important_widgets/product_add__page.dart';
+import 'package:beat/view/important_widgets/product_add_page.dart';
 import 'package:beat/view/important_widgets/widgets.dart';
 
 import '../../../../back/constant.dart';

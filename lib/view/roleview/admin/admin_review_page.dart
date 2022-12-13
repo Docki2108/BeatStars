@@ -53,7 +53,7 @@ class _admin_users_pageState extends State<admin_users_page> {
           dotsview(),
           Positioned(
             child: dots,
-            bottom: 15,
+            bottom: 20,
           )
         ]),
       ],
@@ -68,7 +68,7 @@ class _admin_users_pageState extends State<admin_users_page> {
           minWidth: 150,
           minHeight: 150,
           maxWidth: MediaQuery.of(context).size.width,
-          maxHeight: MediaQuery.of(context).size.height * 0.93,
+          // maxHeight: MediaQuery.of(context).size.height * 0.93,
         ),
         child: PageView(
           controller: _controller,

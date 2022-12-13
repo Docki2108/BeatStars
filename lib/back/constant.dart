@@ -310,6 +310,24 @@ const String myProductView = r'''query myProductView($licensor_id: Int = 10) {
 }
 ''';
 
+const String productSearch = r'''query productSearch( $_like: String = "") {
+  product(where: {name: {_like: $_like}}) {
+    bpm
+    duration
+    genre
+    id_product
+    image
+    info
+    key
+    licensor_id
+    music
+    name
+    price
+    publish_date
+  }
+}
+''';
+
 var maskTelephone = new MaskTextInputFormatter(
   mask: '+#(###)###-##-##',
   filter: {

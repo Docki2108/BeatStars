@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
@@ -13,9 +14,9 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:beat/back/graphql.dart';
 import 'package:beat/theme/colors.dart';
 import 'package:beat/view/important_widgets/noproduct_widget.dart';
-import 'package:beat/view/important_widgets/product_add__page.dart';
+import 'package:beat/view/important_widgets/product_add_page.dart';
 import 'package:beat/view/important_widgets/widgets.dart';
-
+import 'package:rxdart/rxdart.dart';
 import '../../../../back/constant.dart';
 import '../../../../back/music/page_manager.dart';
 
@@ -39,6 +40,32 @@ class products_view_page extends StatefulWidget {
 
 class _products_view_pageState extends State<products_view_page> {
   List<Map<String, dynamic>> productList = [];
+  late TextEditingController searchController;
+  late StreamController<String> searchStream;
+  late QueryOptions currentQuery;
+  @override
+  void initState() {
+    currentQuery = QueryOptions(
+        document: gql(productSearch),
+        fetchPolicy: FetchPolicy.networkOnly,
+        variables: {"_like": "%%"});
+    searchController = TextEditingController();
+    searchStream = StreamController<String>();
+
+    searchController.addListener(() {
+      searchStream.add(searchController.text);
+    });
+    searchStream.stream.debounceTime(Duration(seconds: 1)).listen((event) {
+      setState(() {
+        currentQuery = QueryOptions(
+            document: gql(productSearch),
+            fetchPolicy: FetchPolicy.networkOnly,
+            variables: {"_like": "%$event%"});
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,6 +94,14 @@ class _products_view_pageState extends State<products_view_page> {
                 )
               ],
             ),
+            TextFormField(
+              controller: searchController,
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                hintText: "Поиск",
+                hintStyle: TextStyle(color: Colors.grey),
+              ),
+            ),
           ],
         ),
         centerTitle: true,
@@ -78,8 +113,7 @@ class _products_view_pageState extends State<products_view_page> {
       backgroundColor: color_soft_blue,
       body: FutureBuilder(
         future: GRaphQLProvider.client.query(
-          QueryOptions(
-              document: gql(productPost), fetchPolicy: FetchPolicy.networkOnly),
+          currentQuery,
         ),
         builder: (context, snapshot) {
           if (!snapshot.hasData || snapshot.data == null) {

@@ -1,64 +1,5 @@
-// Widget productlisttile() {
-//   return Column(
-//     children: [
-//       CupertinoButton(
-//         onPressed: () {
-//           showDialog(
-//             context: context,
-//             builder: (context) => Container(
-//               color: Colors.amber,
-//               child: Text('qwe qwe qwe'),
-//             ),
-//           );
-//         },
-//         child: Column(
-//           children: [
-//             Row(
-//               children: [
-//                 Container(
-//                   height: 90,
-//                   width: 90,
-//                   decoration: const BoxDecoration(
-//                     color: Colors.blueGrey,
-//                     //borderRadius: BorderRadius.circular(10),
-//                   ),
-//                 ),
-//                 const SizedBox(
-//                   width: 15,
-//                 ),
-//                 Expanded(
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     mainAxisAlignment: MainAxisAlignment.start,
-//                     children: [
-//                       Text(
-//                         'sss sd s ds sd sd sdsd sd sd s',
-//                         style: TextStyle(fontWeight: FontWeight.bold),
-//                       ),
-//                       const SizedBox(
-//                         height: 5,
-//                       ),
-//                       Text(
-//                         'udoqwdd dddddd ddddd dddd dd d ddddddd ddddddddddd ddddddd dddddddddddddddddddddddddddddd qcw qw',
-//                         maxLines: 3,
-//                         overflow: TextOverflow.ellipsis,
-//                         style: TextStyle(color: Colors.blueGrey),
-//                       )
-//                     ],
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ],
-//         ),
-//       ),
-//       Container(
-//         height: 0.1,
-//         color: Colors.black87,
-//       ),
-//     ],
-//   );
-// }
+// ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings
+
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:beat/back/constant.dart';
@@ -71,15 +12,6 @@ import 'package:just_audio/just_audio.dart';
 import '../../back/graphql.dart';
 import '../../back/music/page_manager.dart';
 
-// late FocusNode nameUpdateNode;
-// late FocusNode priceUpdateNode;
-// late FocusNode durationUpdateNode;
-// late FocusNode bpmUpdateNode;
-// late FocusNode keyUpdateNode;
-// late FocusNode genreUpdateNode;
-// late FocusNode infoUpdateNode;
-
-//useless
 Widget noproduct() {
   return SingleChildScrollView(
     child: Column(
@@ -1351,34 +1283,35 @@ class _LicensorPostState extends State<LicensorPost> {
                                     var res =
                                         await GRaphQLProvider.client.mutate(
                                       MutationOptions(
-                                          document: gql(licensorUpdate),
-                                          variables: {
-                                            'login': loginUpdateController.text
-                                                .trim(),
-                                            'password': passwordUpdateController
-                                                .text
-                                                .trim(),
-                                            'mail': mailUpdateController.text
-                                                .trim(),
-                                            'info': infoUpdateController.text
-                                                .trim(),
-                                            'surname': surnameUpdateController
-                                                .text
-                                                .trim(),
-                                            'name': nameUpdateController.text
-                                                .trim(),
-                                            'patronymic':
-                                                patronymicUpdateController.text
-                                                    .trim(),
-                                            'passport_series':
-                                                passport_seriesUpdateController
-                                                    .text
-                                                    .trim(),
-                                            'passport_number':
-                                                passport_numberUpdateController
-                                                    .text
-                                                    .trim(),
-                                          }),
+                                        document: gql(licensorUpdate),
+                                        variables: {
+                                          'login':
+                                              loginUpdateController.text.trim(),
+                                          'password': passwordUpdateController
+                                              .text
+                                              .trim(),
+                                          'mail':
+                                              mailUpdateController.text.trim(),
+                                          'info':
+                                              infoUpdateController.text.trim(),
+                                          'surname': surnameUpdateController
+                                              .text
+                                              .trim(),
+                                          'name':
+                                              nameUpdateController.text.trim(),
+                                          'patronymic':
+                                              patronymicUpdateController.text
+                                                  .trim(),
+                                          'passport_series':
+                                              passport_seriesUpdateController
+                                                  .text
+                                                  .trim(),
+                                          'passport_number':
+                                              passport_numberUpdateController
+                                                  .text
+                                                  .trim(),
+                                        },
+                                      ),
                                     );
                                     querryToSetUpdLicensor = sendUpdateMut(
                                       widget.id_licensor,
