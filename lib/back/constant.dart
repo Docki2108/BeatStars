@@ -328,6 +328,57 @@ const String productSearch = r'''query productSearch( $_like: String = "") {
 }
 ''';
 
+const String errorRequestSearch = r'''''';
+
+const String viewLicenseOfLicensor =
+    r'''query viewLicenseOfLicensor($licensor_id: Int = 10) {
+  license(where: {product: {licensor_id: {_eq: $licensor_id}}}) {
+    type
+    product_id
+    id_license
+    info
+  }
+}''';
+
+const String testviewAllErrorRequest = r'''query viewAllErrorRequest {
+  error_request {
+    
+    id_error_request
+    info
+    send_date
+  }
+}''';
+
+const String viewAllErrorRequest = r'''query MyQuery($_info: String = "") {
+  error_request(where: {info: {_like: $_info}}) {
+    id_error_request
+    info
+    send_date
+  }
+}''';
+
+const String errorRequestView = r'''query MyQuery {
+  error_request {
+    client_id
+    id_error_request
+    info
+    send_date
+  }
+}
+''';
+
+const String addErrorRequest =
+    r'''mutation addLicense($info: String = "", $send_date: date = "", $client_id: Int = 10) {
+  insert_error_request(objects: {info: $info, send_date: $send_date, client_id: $client_id}) {
+    returning {
+      id_error_request
+      client_id
+      info
+      send_date
+    }
+  }
+}''';
+
 var maskTelephone = new MaskTextInputFormatter(
   mask: '+#(###)###-##-##',
   filter: {
@@ -338,6 +389,30 @@ var maskTelephone = new MaskTextInputFormatter(
 
 var maskDuration = new MaskTextInputFormatter(
   mask: '##:##',
+  filter: {
+    "#": RegExp(r'[0-9]'),
+  },
+  type: MaskAutoCompletionType.lazy,
+);
+
+var maskShopCard = new MaskTextInputFormatter(
+  mask: '#### #### #### ####',
+  filter: {
+    "#": RegExp(r'[0-9]'),
+  },
+  type: MaskAutoCompletionType.lazy,
+);
+
+var maskCVV = new MaskTextInputFormatter(
+  mask: '###',
+  filter: {
+    "#": RegExp(r'[0-9]'),
+  },
+  type: MaskAutoCompletionType.lazy,
+);
+
+var maskCardDate = new MaskTextInputFormatter(
+  mask: '##/##',
   filter: {
     "#": RegExp(r'[0-9]'),
   },
@@ -362,3 +437,6 @@ var maskPassportNumber = new MaskTextInputFormatter(
   },
   type: MaskAutoCompletionType.lazy,
 );
+
+const String mymail = 'vadim.dumilin@mail.ru';
+const String mymailpassword = 'zsefvcxd19283746555';

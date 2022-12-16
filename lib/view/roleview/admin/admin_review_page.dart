@@ -9,17 +9,18 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'admin_clients_page.dart';
 
-class admin_users_page extends StatefulWidget {
-  const admin_users_page({super.key});
+class admin_review_page extends StatefulWidget {
+  const admin_review_page({super.key});
 
   @override
-  State<admin_users_page> createState() => _admin_users_pageState();
+  State<admin_review_page> createState() => _admin_review_pageState();
 }
 
-class _admin_users_pageState extends State<admin_users_page> {
+class _admin_review_pageState extends State<admin_review_page> {
   final _controller = PageController();
   String _textdate = '';
   int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     void onPageChange(double page) {
@@ -68,7 +69,7 @@ class _admin_users_pageState extends State<admin_users_page> {
           minWidth: 150,
           minHeight: 150,
           maxWidth: MediaQuery.of(context).size.width,
-          // maxHeight: MediaQuery.of(context).size.height * 0.93,
+          maxHeight: MediaQuery.of(context).size.height * 0.93,
         ),
         child: PageView(
           controller: _controller,

@@ -60,13 +60,7 @@ class _admin_products_view_pageState extends State<admin_products_view_page> {
             ]),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  color: Colors.white,
-                  icon: const Icon(Icons.shopping_bag_outlined),
-                )
-              ],
+              children: [],
             ),
           ],
         ),

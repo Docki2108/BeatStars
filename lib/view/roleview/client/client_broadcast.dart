@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:beat/theme/colors.dart';
 import 'package:beat/view/roleview/client/client_navigation_pages/client_my_account_pages.dart';
-import 'client_navigation_pages/client_my_activity_page.dart';
+import 'client_error_request_page.dart';
+import 'client_error_request_view_page.dart';
+import 'client_navigation_pages/client_license_page.dart';
 import 'client_navigation_pages/client_products_view_page.dart';
 
 main() {
@@ -56,7 +58,7 @@ class _client_broadcastState extends State<client_broadcast> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                //crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MaterialButton(
                     onPressed: () {
@@ -99,7 +101,7 @@ class _client_broadcastState extends State<client_broadcast> {
                           color: currentIndex == 0 ? Colors.blue : Colors.grey,
                         ),
                         Text(
-                          'Мои товары',
+                          'Лицензии',
                           style: TextStyle(
                             color:
                                 currentIndex == 0 ? Colors.blue : Colors.grey,
@@ -116,7 +118,7 @@ class _client_broadcastState extends State<client_broadcast> {
                   MaterialButton(
                     onPressed: () {
                       setState(() {
-                        currentScreen = client_my_account_page();
+                        currentScreen = client_error_request__page();
                         currentIndex = 0;
                       });
                     },
@@ -125,16 +127,16 @@ class _client_broadcastState extends State<client_broadcast> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.dashboard,
+                          Icons.healing_sharp,
                           color: currentIndex == 0 ? Colors.blue : Colors.grey,
                         ),
                         Text(
-                          '*',
+                          'Помощь',
                           style: TextStyle(
                             color:
                                 currentIndex == 0 ? Colors.blue : Colors.grey,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),

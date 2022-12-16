@@ -19,20 +19,21 @@ main() {
     MaterialApp(
       theme: ThemeData(useMaterial3: true),
       debugShowCheckedModeBanner: false,
-      home: third_page(),
+      home: client_my_activity_page(),
     ),
   );
 }
 
-class third_page extends StatefulWidget {
-  third_page({Key? key}) : super(key: key);
+class client_my_activity_page extends StatefulWidget {
+  client_my_activity_page({Key? key}) : super(key: key);
   HasuraConnect hasuraConnect = HasuraConnect(GRAPHQL_LINK);
 
   @override
-  _third_pageState createState() => _third_pageState();
+  _client_my_activity_pageState createState() =>
+      _client_my_activity_pageState();
 }
 
-class _third_pageState extends State<third_page> {
+class _client_my_activity_pageState extends State<client_my_activity_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

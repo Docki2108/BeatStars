@@ -96,7 +96,7 @@ class _licensor_broadcastState extends State<licensor_broadcast> {
                   MaterialButton(
                     onPressed: () {
                       setState(() {
-                        currentScreen = products_view_page();
+                        currentScreen = third_page();
                         currentIndex = 0;
                       });
                     },
@@ -109,7 +109,7 @@ class _licensor_broadcastState extends State<licensor_broadcast> {
                           color: currentIndex == 0 ? Colors.blue : Colors.grey,
                         ),
                         Text(
-                          'Мои товары',
+                          'Лицензии',
                           style: TextStyle(
                             color:
                                 currentIndex == 0 ? Colors.blue : Colors.grey,
@@ -135,7 +135,7 @@ class _licensor_broadcastState extends State<licensor_broadcast> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.dashboard,
+                          Icons.check_box_outline_blank_outlined,
                           color: currentIndex == 0 ? Colors.blue : Colors.grey,
                         ),
                         Text(
@@ -181,55 +181,4 @@ class _licensor_broadcastState extends State<licensor_broadcast> {
       ),
     );
   }
-
-// class _licensor_broadcastState extends State<licensor_broadcast> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: color_soft_blue,
-//       body: screens[currentIndex],
-//       bottomNavigationBar: BottomNavigationBar(
-//         iconSize: 32,
-//         enableFeedback: true,
-//         backgroundColor: color_blue,
-//         selectedItemColor: Colors.white,
-//         unselectedItemColor: Color.fromARGB(255, 25, 81, 127),
-//         type: BottomNavigationBarType.fixed,
-//         currentIndex: currentIndex,
-//         onTap: (index) => setState(() => currentIndex = index),
-//         items: const <BottomNavigationBarItem>[
-//           BottomNavigationBarItem(
-//             icon: Icon(Icons.wysiwyg, color: Colors.blue),
-//             label: 'Товары',
-//           ),
-//           BottomNavigationBarItem(
-//             icon: Icon(Icons.table_rows_outlined, color: Colors.blue),
-//             label: 'Моя деятельность',
-//           ),
-//           BottomNavigationBarItem(
-//               icon: Icon(Icons.account_box, color: Colors.blue),
-//               label: 'Личный кабинет',
-//               backgroundColor: color_soft_blue),
-//         ],
-//       ),
-//     );
-//   }
-
-  // Widget dotsview() {
-  //   return SingleChildScrollView(
-  //     scrollDirection: Axis.vertical,
-  //     child: ConstrainedBox(
-  //       constraints: BoxConstraints(
-  //         minWidth: 150,
-  //         minHeight: 150,
-  //         maxWidth: MediaQuery.of(context).size.width,
-  //         maxHeight: MediaQuery.of(context).size.height * 0.815,
-  //       ),
-  //       child: PageView(
-  //         controller: _controller,
-  //         children: const [TodayPage(), TomorrowPage(), DayAfterPage()],
-  //       ),
-  //     ),
-  //   );
-  // }
 }

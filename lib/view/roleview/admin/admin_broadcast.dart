@@ -34,10 +34,12 @@ class admin_broadcast extends StatefulWidget {
 
 int currentIndex = 0;
 final screens = [
-  admin_users_page(),
+  admin_review_page(),
+  admin_products_view_page(),
+  admin_my_account_page(),
 ];
 final PageStorageBucket bucket = PageStorageBucket();
-Widget currentScreen = admin_users_page();
+Widget currentScreen = admin_review_page();
 
 class _admin_broadcastState extends State<admin_broadcast> {
   @override
@@ -67,7 +69,7 @@ class _admin_broadcastState extends State<admin_broadcast> {
                   MaterialButton(
                     onPressed: () {
                       setState(() {
-                        currentScreen = admin_users_page();
+                        currentScreen = admin_review_page();
                         currentIndex = 0;
                       });
                     },
@@ -144,31 +146,6 @@ class _admin_broadcastState extends State<admin_broadcast> {
                       ],
                     ),
                   ),
-                  // MaterialButton(
-                  //   onPressed: () {
-                  //     setState(() {
-                  //       currentScreen = client_my_account_page();
-                  //       currentIndex = 0;
-                  //     });
-                  //   },
-                  //   minWidth: 40,
-                  //   child: Column(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-                  //       Icon(
-                  //         Icons.account_box,
-                  //         color: currentIndex == 0 ? Colors.blue : Colors.grey,
-                  //       ),
-                  //       Text(
-                  //         'Мой аккаунт',
-                  //         style: TextStyle(
-                  //           color:
-                  //               currentIndex == 0 ? Colors.blue : Colors.grey,
-                  //         ),
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
                 ],
               )
             ],

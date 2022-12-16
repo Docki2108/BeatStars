@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:beat/back/graphql.dart';
+import 'package:beat/models/user_model.dart';
 import 'package:beat/view/important_widgets/noproduct_widget.dart';
 import 'package:beat/view/important_widgets/product_add_page.dart';
 import 'package:beat/view/important_widgets/widgets.dart';
@@ -19,27 +20,29 @@ main() {
     MaterialApp(
       theme: ThemeData(useMaterial3: true),
       debugShowCheckedModeBanner: false,
-      home: third_page(),
+      home: operator_error_request__page(),
     ),
   );
 }
 
-class third_page extends StatefulWidget {
-  third_page({Key? key}) : super(key: key);
+class operator_error_request__page extends StatefulWidget {
+  operator_error_request__page({Key? key}) : super(key: key);
   HasuraConnect hasuraConnect = HasuraConnect(GRAPHQL_LINK);
 
   @override
-  _third_pageState createState() => _third_pageState();
+  _operator_error_request__pageState createState() =>
+      _operator_error_request__pageState();
 }
 
-class _third_pageState extends State<third_page> {
+class _operator_error_request__pageState
+    extends State<operator_error_request__page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: color_soft_blue,
       body: FutureBuilder(
         future: GRaphQLProvider.client
-            .query(QueryOptions(document: gql(licencePost))),
+            .query(QueryOptions(document: gql(errorRequestView))),
         builder: (context, snapshot) {
           if (!snapshot.hasData || snapshot.data == null) {
             log('Загрузка данных с API...');
@@ -55,16 +58,18 @@ class _third_pageState extends State<third_page> {
             );
           } else {
             log('Данные найдены');
+            log(UserModel().operator!.login);
             // log(snapshot.data.toString());
-            var licenseList = (((snapshot.data as QueryResult).data
-                    as Map<String, dynamic>)['license'] as List<Object?>)
+            var errorRequestList = (((snapshot.data as QueryResult).data
+                    as Map<String, dynamic>)['error_request'] as List<Object?>)
                 .cast<Map<String, dynamic>>();
             return ListView.builder(
-              itemCount: licenseList.length,
+              itemCount: errorRequestList.length,
               itemBuilder: (context, i) {
-                return LicensePost(
-                  type: '${licenseList[i]['type']}',
-                  info: '${licenseList[i]['info']}',
+                return ErrorRequestPostforClient(
+                  id: '${errorRequestList[i]['id']}',
+                  send_date: '${errorRequestList[i]['send_date']}',
+                  info: '${errorRequestList[i]['info']}',
                 );
               },
             );

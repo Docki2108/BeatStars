@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 import 'package:beat/back/graphql.dart';
 import 'package:beat/view/important_widgets/noproduct_widget.dart';
@@ -10,6 +11,7 @@ import 'package:graphql/client.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:beat/theme/colors.dart';
 import '../../../../back/constant.dart';
@@ -34,6 +36,33 @@ class client_products_view_page extends StatefulWidget {
 }
 
 class _client_products_view_pageState extends State<client_products_view_page> {
+  late TextEditingController searchController;
+  late StreamController<String> searchStream;
+  late QueryOptions currentQuery;
+
+  @override
+  void initState() {
+    currentQuery = QueryOptions(
+        document: gql(productSearch),
+        fetchPolicy: FetchPolicy.networkOnly,
+        variables: {"_like": "%%"});
+    searchController = TextEditingController();
+    searchStream = StreamController<String>();
+
+    searchController.addListener(() {
+      searchStream.add(searchController.text);
+    });
+    searchStream.stream.debounceTime(Duration(seconds: 1)).listen((event) {
+      setState(() {
+        currentQuery = QueryOptions(
+            document: gql(productSearch),
+            fetchPolicy: FetchPolicy.networkOnly,
+            variables: {"_like": "%$event%"});
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,15 +81,13 @@ class _client_products_view_pageState extends State<client_products_view_page> {
                 ],
               ),
             ]),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  color: Colors.white,
-                  icon: const Icon(Icons.shopping_bag_outlined),
-                )
-              ],
+            TextFormField(
+              controller: searchController,
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                hintText: "Поиск",
+                hintStyle: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),
@@ -74,8 +101,9 @@ class _client_products_view_pageState extends State<client_products_view_page> {
       body: Stack(
         children: [
           FutureBuilder(
-            future: GRaphQLProvider.client
-                .query(QueryOptions(document: gql(productPost))),
+            future: GRaphQLProvider.client.query(
+              currentQuery,
+            ),
             builder: (context, snapshot) {
               if (!snapshot.hasData || snapshot.data == null) {
                 log('Загрузка товаров с API...');
@@ -119,32 +147,4 @@ class _client_products_view_pageState extends State<client_products_view_page> {
       ),
     );
   }
-
-  Widget test() {
-    return ListView.builder(itemBuilder: (context, index) {
-      return Card(
-        child: Padding(
-          padding:
-              const EdgeInsets.only(top: 32, bottom: 32, left: 16, right: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                'title',
-              ),
-              Text('text')
-            ],
-          ),
-        ),
-      );
-    });
-  }
 }
-
-
-
-// void fetchData() async {
-//   setState(() {
-//     _loading = true;
-//   });
-// }

@@ -73,6 +73,18 @@ class _LicensorRegistrationPageState extends State<LicensorRegistrationPage> {
     super.dispose();
   }
 
+  void clearTextFields() {
+    loginController.clear();
+    passwordController.clear();
+    mailController.clear();
+    infoController.clear();
+    nameController.clear();
+    surnameController.clear();
+    patronymicController.clear();
+    passport_numberController.clear();
+    passport_seriesController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,8 +99,14 @@ class _LicensorRegistrationPageState extends State<LicensorRegistrationPage> {
                   SizedBox(
                     height: 50,
                   ),
-                  Text(
-                      'Чтобы зарегистрироваться, введите ваши актуальные данные'),
+                  const Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      'Чтобы зарегистрироваться, введите ваши актуальные данные',
+                      style: TextStyle(fontSize: 25, color: Colors.white),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -362,6 +380,7 @@ class _LicensorRegistrationPageState extends State<LicensorRegistrationPage> {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       Navigator.pushNamed(context, '/');
                     });
+                    clearTextFields();
                   }
                 },
                 style: ButtonStyle(
@@ -394,6 +413,7 @@ class _LicensorRegistrationPageState extends State<LicensorRegistrationPage> {
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     Navigator.pushNamed(context, '/registration');
                   });
+                  clearTextFields();
                 },
                 style: ButtonStyle(
                   backgroundColor:

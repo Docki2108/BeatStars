@@ -19,28 +19,29 @@ main() {
     MaterialApp(
       theme: ThemeData(useMaterial3: true),
       debugShowCheckedModeBanner: false,
-      home: client_my_activity_page(),
+      home: client_error_request__page(),
     ),
   );
 }
 
-class client_my_activity_page extends StatefulWidget {
-  client_my_activity_page({Key? key}) : super(key: key);
+class client_error_request__page extends StatefulWidget {
+  client_error_request__page({Key? key}) : super(key: key);
   HasuraConnect hasuraConnect = HasuraConnect(GRAPHQL_LINK);
 
   @override
-  _client_my_activity_pageState createState() =>
-      _client_my_activity_pageState();
+  _client_error_request__pageState createState() =>
+      _client_error_request__pageState();
 }
 
-class _client_my_activity_pageState extends State<client_my_activity_page> {
+class _client_error_request__pageState
+    extends State<client_error_request__page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: color_soft_blue,
       body: FutureBuilder(
         future: GRaphQLProvider.client
-            .query(QueryOptions(document: gql(licencePost))),
+            .query(QueryOptions(document: gql(errorRequestView))),
         builder: (context, snapshot) {
           if (!snapshot.hasData || snapshot.data == null) {
             log('Загрузка данных с API...');
@@ -57,31 +58,20 @@ class _client_my_activity_pageState extends State<client_my_activity_page> {
           } else {
             log('Данные найдены');
             // log(snapshot.data.toString());
-            var licenseList = (((snapshot.data as QueryResult).data
-                    as Map<String, dynamic>)['license'] as List<Object?>)
+            var errorRequestList = (((snapshot.data as QueryResult).data
+                    as Map<String, dynamic>)['error_request'] as List<Object?>)
                 .cast<Map<String, dynamic>>();
             return ListView.builder(
-              itemCount: licenseList.length,
+              itemCount: errorRequestList.length,
               itemBuilder: (context, i) {
-                return LicensePost(
-                  type: '${licenseList[i]['type']}',
-                  info: '${licenseList[i]['info']}',
+                return ErrorRequestPostforClient(
+                  id: '${errorRequestList[i]['id']}',
+                  send_date: '${errorRequestList[i]['send_date']}',
+                  info: '${errorRequestList[i]['info']}',
                 );
               },
             );
           }
-        },
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        label: const Text('ДОБАВИТЬ'),
-        icon: const Icon(CupertinoIcons.add),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const PostPage(),
-            ),
-          );
         },
       ),
     );

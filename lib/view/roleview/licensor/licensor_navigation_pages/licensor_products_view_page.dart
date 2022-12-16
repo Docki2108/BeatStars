@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
+import 'package:beat/models/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -84,22 +85,12 @@ class _products_view_pageState extends State<products_view_page> {
                 ],
               ),
             ]),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  color: Colors.white,
-                  icon: const Icon(Icons.shopping_bag_outlined),
-                )
-              ],
-            ),
             TextFormField(
               controller: searchController,
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: "Поиск",
-                hintStyle: TextStyle(color: Colors.grey),
+                hintStyle: TextStyle(color: Colors.white),
               ),
             ),
           ],

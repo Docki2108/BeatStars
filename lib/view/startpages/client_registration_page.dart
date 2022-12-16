@@ -32,6 +32,18 @@ TextEditingController patronymicController = TextEditingController();
 TextEditingController passport_seriesController = TextEditingController();
 TextEditingController passport_numberController = TextEditingController();
 
+void clearTextFields() {
+  loginController.clear();
+  passwordController.clear();
+  mailController.clear();
+  telephoneController.clear();
+  nameController.clear();
+  surnameController.clear();
+  patronymicController.clear();
+  passport_numberController.clear();
+  passport_seriesController.clear();
+}
+
 late FocusNode loginNode;
 late FocusNode passwordNode;
 late FocusNode mailNode;
@@ -113,8 +125,14 @@ class _ClientRegistrationPageState extends State<ClientRegistrationPage> {
                   const SizedBox(
                     height: 50,
                   ),
-                  const Text(
-                      'Чтобы зарегистрироваться, введите ваши актуальные данные'),
+                  const Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      'Чтобы зарегистрироваться, введите ваши актуальные данные',
+                      style: TextStyle(fontSize: 25, color: Colors.white),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -384,6 +402,7 @@ class _ClientRegistrationPageState extends State<ClientRegistrationPage> {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       Navigator.pushNamed(context, '/');
                     });
+                    clearTextFields();
                   }
                 },
                 style: ButtonStyle(
@@ -416,6 +435,7 @@ class _ClientRegistrationPageState extends State<ClientRegistrationPage> {
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     Navigator.pushNamed(context, '/registration');
                   });
+                  clearTextFields();
                 },
                 style: ButtonStyle(
                   backgroundColor:

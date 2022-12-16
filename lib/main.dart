@@ -85,6 +85,11 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
+  void clearText() {
+    loginController.clear();
+    passwordController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,7 +122,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(
-              height: 50,
+              height: 25,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -130,13 +135,9 @@ class _HomePageState extends State<HomePage> {
                         Text(
                           'BeatStars',
                           style: TextStyle(
-                            fontSize: 40,
-                            fontFamily: 'RobotoMono',
-                            // foreground: Paint()
-                            //   ..style = PaintingStyle.stroke
-                            //   ..strokeWidth = 100
-                            //   ..color = Colors.blue[700]!,
-                          ),
+                              fontSize: 70,
+                              fontFamily: 'RobotoMono',
+                              color: Colors.white),
                         ),
                         // Text(
                         //   'хххх смешно ххх',
@@ -223,14 +224,6 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const Center(
-                    child: Text(
-                      "Забыли пароль?",
-                      style: TextStyle(
-                        color: color_blue,
-                      ),
-                    ),
-                  ),
                   const SizedBox(
                     height: 10,
                   ),
@@ -301,6 +294,7 @@ class _HomePageState extends State<HomePage> {
                                       Navigator.pushReplacementNamed(
                                           context, '/admin_broadcast');
                                     });
+                                    clearText();
                                     break;
                                   case "clientlogin":
                                     var clientData =
@@ -313,6 +307,7 @@ class _HomePageState extends State<HomePage> {
                                       Navigator.pushReplacementNamed(
                                           context, '/client_broadcast');
                                     });
+                                    clearText();
                                     break;
                                   case "operatorlogin":
                                     var operatorData =
@@ -326,6 +321,7 @@ class _HomePageState extends State<HomePage> {
                                       Navigator.pushReplacementNamed(
                                           context, '/operator_broadcast');
                                     });
+                                    clearText();
                                     break;
                                   case "licensorlogin":
                                     var licensorData =
@@ -341,6 +337,7 @@ class _HomePageState extends State<HomePage> {
                                       Navigator.pushReplacementNamed(
                                           context, '/licensor_broadcast');
                                     });
+                                    clearText();
                                     break;
                                   default:
                                     Future.delayed(
