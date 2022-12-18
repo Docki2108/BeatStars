@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:beat/back/graphql.dart';
-import 'package:beat/view/important_widgets/noproduct_widget.dart';
 import 'package:beat/view/important_widgets/product_add_page.dart';
 import 'package:beat/view/important_widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -52,12 +51,10 @@ class _client_error_request__pageState
                     Center(
                       child: CircularProgressIndicator(),
                     )
-                    //noproduct(),
                   ]),
             );
           } else {
             log('Данные найдены');
-            // log(snapshot.data.toString());
             var errorRequestList = (((snapshot.data as QueryResult).data
                     as Map<String, dynamic>)['error_request'] as List<Object?>)
                 .cast<Map<String, dynamic>>();
@@ -76,32 +73,4 @@ class _client_error_request__pageState
       ),
     );
   }
-
-  Widget test() {
-    return ListView.builder(itemBuilder: (context, index) {
-      return Card(
-        child: Padding(
-          padding:
-              const EdgeInsets.only(top: 32, bottom: 32, left: 16, right: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                'title',
-              ),
-              Text('text')
-            ],
-          ),
-        ),
-      );
-    });
-  }
 }
-
-
-
-// void fetchData() async {
-//   setState(() {
-//     _loading = true;
-//   });
-// }

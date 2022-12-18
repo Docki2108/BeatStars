@@ -27,8 +27,6 @@ class licensor_broadcast extends StatefulWidget {
   @override
   void initState() {
     final _controller = PageController();
-
-    //super.initState();
   }
 }
 
@@ -121,58 +119,40 @@ class _licensor_broadcastState extends State<licensor_broadcast> {
                 ],
               ),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  MaterialButton(
-                    onPressed: () {
-                      setState(() {
-                        currentScreen = products_view_page();
-                        currentIndex = 0;
-                      });
-                    },
-                    minWidth: 40,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.check_box_outline_blank_outlined,
-                          color: currentIndex == 0 ? Colors.blue : Colors.grey,
-                        ),
-                        Text(
-                          '*',
-                          style: TextStyle(
+                  Center(
+                    child: MaterialButton(
+                      onPressed: () {
+                        setState(() {
+                          currentScreen = myaccount();
+                          currentIndex = 0;
+                        });
+                      },
+                      minWidth: 40,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.account_box,
                             color:
                                 currentIndex == 0 ? Colors.blue : Colors.grey,
                           ),
-                        )
-                      ],
+                          Text(
+                            'Мой аккаунт',
+                            style: TextStyle(
+                              color:
+                                  currentIndex == 0 ? Colors.blue : Colors.grey,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                  MaterialButton(
-                    onPressed: () {
-                      setState(() {
-                        currentScreen = myaccount();
-                        currentIndex = 0;
-                      });
-                    },
-                    minWidth: 40,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.account_box,
-                          color: currentIndex == 0 ? Colors.blue : Colors.grey,
-                        ),
-                        Text(
-                          'Мой аккаунт',
-                          style: TextStyle(
-                            color:
-                                currentIndex == 0 ? Colors.blue : Colors.grey,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                  const SizedBox(
+                    width: 40,
+                  )
                 ],
               )
             ],

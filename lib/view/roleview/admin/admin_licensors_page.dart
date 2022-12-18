@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
+import 'package:beat/view/roleview/admin/admin_licensor_add_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,12 +13,10 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:beat/back/graphql.dart';
 import 'package:beat/theme/colors.dart';
-import 'package:beat/view/important_widgets/noproduct_widget.dart';
 import 'package:beat/view/important_widgets/product_add_page.dart';
 import 'package:beat/view/important_widgets/widgets.dart';
 
 import '../../../../back/constant.dart';
-import '../../../../back/music/page_manager.dart';
 
 main() {
   runApp(
@@ -48,14 +47,20 @@ class _admin_licensors_pageState extends State<admin_licensors_page> {
         title: Column(
           children: [
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Лицензиары',
-                  ),
-                ],
+              const Text(
+                'Лицензиары',
               ),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => admin_licensor_add_page(),
+                    ),
+                  );
+                },
+                icon: Icon(Icons.add_circle_outline_outlined),
+              )
             ]),
           ],
         ),

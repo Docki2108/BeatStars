@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:beat/back/graphql.dart';
 import 'package:beat/models/user_model.dart';
-import 'package:beat/view/important_widgets/noproduct_widget.dart';
 import 'package:beat/view/important_widgets/product_add_page.dart';
 import 'package:beat/view/important_widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -41,8 +40,12 @@ class _operator_error_request__pageState
     return Scaffold(
       backgroundColor: color_soft_blue,
       body: FutureBuilder(
-        future: GRaphQLProvider.client
-            .query(QueryOptions(document: gql(errorRequestView))),
+        future: GRaphQLProvider.client.query(
+          QueryOptions(
+            document: gql(errorRequestView),
+            fetchPolicy: FetchPolicy.networkOnly,
+          ),
+        ),
         builder: (context, snapshot) {
           if (!snapshot.hasData || snapshot.data == null) {
             log('Загрузка данных с API...');
@@ -53,13 +56,11 @@ class _operator_error_request__pageState
                     Center(
                       child: CircularProgressIndicator(),
                     )
-                    //noproduct(),
                   ]),
             );
           } else {
             log('Данные найдены');
             log(UserModel().operator!.login);
-            // log(snapshot.data.toString());
             var errorRequestList = (((snapshot.data as QueryResult).data
                     as Map<String, dynamic>)['error_request'] as List<Object?>)
                 .cast<Map<String, dynamic>>();
@@ -78,32 +79,4 @@ class _operator_error_request__pageState
       ),
     );
   }
-
-  Widget test() {
-    return ListView.builder(itemBuilder: (context, index) {
-      return Card(
-        child: Padding(
-          padding:
-              const EdgeInsets.only(top: 32, bottom: 32, left: 16, right: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                'title',
-              ),
-              Text('text')
-            ],
-          ),
-        ),
-      );
-    });
-  }
 }
-
-
-
-// void fetchData() async {
-//   setState(() {
-//     _loading = true;
-//   });
-// }

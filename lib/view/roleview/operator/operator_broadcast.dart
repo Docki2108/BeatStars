@@ -28,8 +28,6 @@ class operator_broadcast extends StatefulWidget {
   @override
   void initState() {
     final _controller = PageController();
-
-    //super.initState();
   }
 }
 

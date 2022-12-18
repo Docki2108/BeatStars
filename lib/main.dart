@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:beat/models/roles/client_model.dart';
 import 'package:beat/models/roles/licensor_model.dart';
 import 'package:beat/models/roles/operator_model.dart';
+import 'package:beat/view/roleview/admin/admin_review_page.dart';
 import 'package:beat/view/roleview/licensor/licensor_broadcast.dart';
 import 'package:beat/back/graphql.dart';
 import 'package:beat/view/roleview/client/client_broadcast.dart';
@@ -12,13 +13,11 @@ import 'package:graphql/client.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:lottie/lottie.dart';
 import 'package:beat/theme/colors.dart';
 import 'back/constant.dart';
 import 'models/roles/admin_model.dart';
 import 'models/user_model.dart';
 import 'view/roleview/admin/admin_broadcast.dart';
-import 'view/roleview/operator/operator_page.dart';
 import 'view/startpages/client_registration_page.dart';
 import 'view/startpages/licensor_registration_page.dart';
 import 'view/startpages/registration_page.dart';
@@ -39,6 +38,8 @@ Future<void> main() async => {
             '/registration': (context) => RegistrationPage(),
             '/client_registration': (context) => ClientRegistrationPage(),
             '/licensor_registration': (context) => LicensorRegistrationPage(),
+            //
+            '/admin_users': (context) => admin_review_page(),
           },
           theme: ThemeData(fontFamily: 'RobotoMono'),
         ),

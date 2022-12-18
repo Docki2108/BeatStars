@@ -36,28 +36,26 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: color_soft_blue,
       body: SafeArea(
-          child: ListView(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-                  child: Text('Расписание',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w500)),
+        child: ListView(
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
+                    child: Text('Расписание',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w500)),
+                  ),
                 ),
-              ),
-            ],
-          )
-        ],
-      )),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
-
-  //DateTime now = DateTime.now();
-
 }

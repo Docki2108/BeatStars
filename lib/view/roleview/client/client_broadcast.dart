@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:beat/theme/colors.dart';
 import 'package:beat/view/roleview/client/client_navigation_pages/client_my_account_pages.dart';
 import 'client_error_request_page.dart';
-import 'client_error_request_view_page.dart';
 import 'client_navigation_pages/client_license_page.dart';
 import 'client_navigation_pages/client_products_view_page.dart';
 
@@ -173,22 +172,4 @@ class _client_broadcastState extends State<client_broadcast> {
       ),
     );
   }
-
-  // Widget dotsview() {
-  //   return SingleChildScrollView(
-  //     scrollDirection: Axis.vertical,
-  //     child: ConstrainedBox(
-  //       constraints: BoxConstraints(
-  //         minWidth: 150,
-  //         minHeight: 150,
-  //         maxWidth: MediaQuery.of(context).size.width,
-  //         maxHeight: MediaQuery.of(context).size.height * 0.815,
-  //       ),
-  //       child: PageView(
-  //         controller: _controller,
-  //         children: const [TodayPage(), TomorrowPage(), DayAfterPage()],
-  //       ),
-  //     ),
-  //   );
-  // }
 }

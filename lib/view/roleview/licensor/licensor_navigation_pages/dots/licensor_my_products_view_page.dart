@@ -56,7 +56,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         Center(
                           child: CircularProgressIndicator(),
                         )
-                        //noproduct(),
                       ]),
                 );
               } else {
@@ -116,7 +115,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
-  //DateTime now = DateTime.now();
-
 }

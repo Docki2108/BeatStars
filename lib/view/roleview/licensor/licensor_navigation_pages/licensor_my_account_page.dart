@@ -167,7 +167,6 @@ class _myaccountState extends State<myaccount> {
                               ' ',
                             ),
                             Text(
-                              // ignore: prefer_interpolation_to_compose_strings
                               UserModel().licensor!.passport_series +
                                   ' ' +
                                   UserModel().licensor!.passport_number,
@@ -198,51 +197,6 @@ class _myaccountState extends State<myaccount> {
           ),
         ],
       ),
-      // FutureBuilder(
-      //   future: GRaphQLProvider.client.query(QueryOptions(
-      //       document: gql(licensorInfo), variables: {'login': "licensor"})),
-      //   builder: (context, snapshot) {
-      //     if (!snapshot.hasData || snapshot.data == null) {
-      //       log('Загрузка личных данных с API...');
-      //       return Center(
-      //         child: Column(
-      //             mainAxisAlignment: MainAxisAlignment.center,
-      //             children: [
-      //               Center(
-      //                 child: CircularProgressIndicator(),
-      //               )
-      //               //noproduct(),
-      //             ]),
-      //       );
-      //     } else {
-      //       log('Данные найдены');
-
-      //       var licensorList = (((snapshot.data as QueryResult).data
-      //               as Map<String, dynamic>)['licensor'] as List<Object?>)
-      //           .cast<Map<String, dynamic>>();
-      //       // var aboba = licensorList
-      //       //     .where((element) =>
-      //       //         element['login'] == UserModel().licensor!.login)
-      //       //     .toList();
-      //       log("Ваши данные" + licensorList.toString());
-      //       return ListView.builder(
-      //         itemCount: licensorList.length,
-      //         itemBuilder: (context, i) {
-      //           return LicenserData(
-      //               login: '${licensorList[i]['login']}',
-      //               password: '${licensorList[i]['password']}',
-      //               mail: '${licensorList[i]['mail']}',
-      //               info: '${licensorList[i]['info']}',
-      //               name: '${licensorList[i]['name']}',
-      //               surname: '${licensorList[i]['surname']}',
-      //               patronymic: '${licensorList[i]['patronymic']}',
-      //               passport_series: '${licensorList[i]['passport_series']}',
-      //               passport_number: '${licensorList[i]['passport_number']}');
-      //         },
-      //       );
-      //     }
-      //   },
-      // ),
     );
   }
 }

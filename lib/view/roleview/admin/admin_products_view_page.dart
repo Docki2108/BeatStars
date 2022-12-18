@@ -12,12 +12,10 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:beat/back/graphql.dart';
 import 'package:beat/theme/colors.dart';
-import 'package:beat/view/important_widgets/noproduct_widget.dart';
 import 'package:beat/view/important_widgets/product_add_page.dart';
 import 'package:beat/view/important_widgets/widgets.dart';
 
 import '../../../../back/constant.dart';
-import '../../../../back/music/page_manager.dart';
 
 main() {
   runApp(
@@ -124,25 +122,5 @@ class _admin_products_view_pageState extends State<admin_products_view_page> {
         },
       ),
     );
-  }
-
-  Widget test() {
-    return ListView.builder(itemBuilder: (context, index) {
-      return Card(
-        child: Padding(
-          padding:
-              const EdgeInsets.only(top: 32, bottom: 32, left: 16, right: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                'title',
-              ),
-              Text('text')
-            ],
-          ),
-        ),
-      );
-    });
   }
 }

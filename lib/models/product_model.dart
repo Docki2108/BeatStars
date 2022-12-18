@@ -61,14 +61,6 @@ class ProductModel {
     );
   }
 
-  // 'name': name,
-  //           'price': price,
-  //           'key': key,
-  //           'info': info,
-  //           'genre': genre,
-  //           'duration': duration,
-  //           'bpm': bpm
-
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id_product': id_product,
