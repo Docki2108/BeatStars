@@ -275,7 +275,6 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               );
                             } else {
-                              // была authdata!
                               var entry = authdata.entries.firstWhere(
                                 (element) =>
                                     element.key != '__typename' &&
@@ -331,8 +330,7 @@ class _HomePageState extends State<HomePage> {
                                       licensor:
                                           LicensorModel.fromMap(licensorData),
                                     );
-                                    // loginController.clear();
-                                    // passwordController.clear();
+
                                     WidgetsBinding.instance
                                         .addPostFrameCallback((_) {
                                       Navigator.pushReplacementNamed(
