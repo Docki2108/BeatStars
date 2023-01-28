@@ -3,9 +3,9 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  app_links_windows
+  app_links
   audioplayers_windows
-  connectivity_plus_windows
+  connectivity_plus
   url_launcher_windows
 )
 

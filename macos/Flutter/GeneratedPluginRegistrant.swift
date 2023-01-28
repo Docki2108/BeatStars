@@ -5,12 +5,12 @@
 import FlutterMacOS
 import Foundation
 
-import app_links_macos
+import app_links
 import audio_session
 import audioplayers_darwin
-import connectivity_plus_macos
+import connectivity_plus
 import just_audio
-import path_provider_macos
+import path_provider_foundation
 import sqflite
 import url_launcher_macos
 

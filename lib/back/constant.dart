@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names, unnecessary_new
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+
 import 'package:intl/intl.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 const String GRAPHQL_LINK = "https://present-aphid-14.hasura.app/v1/graphql";
 const String HASURA_PASSWORD =
@@ -437,6 +438,3 @@ var maskPassportNumber = new MaskTextInputFormatter(
   },
   type: MaskAutoCompletionType.lazy,
 );
-
-const String mymail = 'vadim.dumilin@mail.ru';
-const String mymailpassword = 'zsefvcxd19283746555';

@@ -141,194 +141,203 @@ class _CardPostState extends State<CardPost> {
           context: context,
           builder: (_) => AlertDialog(
             titleTextStyle: TextStyle(backgroundColor: Colors.black),
-            content: Row(children: [
-              Flexible(
-                child: Text(
-                  widget.productname,
+            content: SingleChildScrollView(
+              child: Row(children: [
+                Flexible(
+                  child: Text(
+                    widget.productname,
+                  ),
                 ),
-              ),
-              IconButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (_) => AlertDialog(
-                      titleTextStyle: TextStyle(backgroundColor: Colors.black),
-                      content: Center(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              'Название',
-                              style: TextStyle(letterSpacing: 10),
-                            ),
-                            TextFormField(
-                              controller: nameUpdateController,
-                              // focusNode: nameUpdateNode,
-                              decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Название",
-                                hintStyle: TextStyle(color: Colors.grey),
-                              ),
-                            ),
-                            Text(
-                              'Цена',
-                              style: TextStyle(letterSpacing: 10),
-                            ),
-                            TextFormField(
-                              controller: priceUpdateController,
-                              // focusNode: priceUpdateNode,
-                              decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Цена",
-                                hintStyle: TextStyle(color: Colors.grey),
-                              ),
-                            ),
-                            Text(
-                              'Тональность',
-                              style: TextStyle(letterSpacing: 10),
-                            ),
-                            TextFormField(
-                              controller: keyUpdateController,
-                              // focusNode: keyUpdateNode,
-                              decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Тональность",
-                                hintStyle: TextStyle(color: Colors.grey),
-                              ),
-                            ),
-                            Text(
-                              'Жанр',
-                              style: TextStyle(letterSpacing: 10),
-                            ),
-                            TextFormField(
-                              controller: genreUpdateController,
-                              // focusNode: genreUpdateNode,
-                              decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Жанр",
-                                hintStyle: TextStyle(color: Colors.grey),
-                              ),
-                            ),
-                            Text(
-                              'Длительность',
-                              style: TextStyle(letterSpacing: 10),
-                            ),
-                            TextFormField(
-                              controller: durationUpdateController,
-                              // focusNode: durationUpdateNode,
-                              decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Длительность",
-                                hintStyle: TextStyle(color: Colors.grey),
-                              ),
-                            ),
-                            Text(
-                              'УВМ',
-                              style: TextStyle(letterSpacing: 10),
-                            ),
-                            TextFormField(
-                              controller: bpmUpdateController,
-                              // focusNode: bpmUpdateNode,
-                              decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "УВМ",
-                                hintStyle: TextStyle(color: Colors.grey),
-                              ),
-                            ),
-                            Text(
-                              'Инфо',
-                              style: TextStyle(letterSpacing: 10),
-                            ),
-                            TextFormField(
-                              controller: infoUpdateController,
-                              // focusNode: infoUpdateNode,
-                              decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "Инфо",
-                                hintStyle: TextStyle(color: Colors.grey),
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () async {
-                                if (nameUpdateController.text.isEmpty ||
-                                    bpmUpdateController.text.isEmpty ||
-                                    durationUpdateController.text.isEmpty ||
-                                    genreUpdateController.text.isEmpty ||
-                                    priceUpdateController.text.isEmpty ||
-                                    keyUpdateController.text.isEmpty ||
-                                    infoUpdateController.text.isEmpty) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (_) => const AlertDialog(
-                                      content: Text('Заполните все поля!'),
-                                    ),
-                                  );
-                                } else {
-                                  var res = await GRaphQLProvider.client.mutate(
-                                    MutationOptions(
-                                        document: gql(productUpdate),
-                                        variables: {
-                                          'name':
-                                              nameUpdateController.text.trim(),
-                                          'bpm':
-                                              bpmUpdateController.text.trim(),
-                                          'duration': durationUpdateController
-                                              .text
-                                              .trim(),
-                                          'genre':
-                                              genreUpdateController.text.trim(),
-                                          'price':
-                                              priceUpdateController.text.trim(),
-                                          'key':
-                                              keyUpdateController.text.trim(),
-                                          'info':
-                                              infoUpdateController.text.trim(),
-                                        }),
-                                  );
-                                  querryToSetUpd = sendUpdateMut(
-                                    widget.id_product,
-                                    nameUpdateController.text.trim(),
-                                    int.parse(
-                                        priceUpdateController.text.trim()),
-                                    keyUpdateController.text.trim(),
-                                    infoUpdateController.text.trim(),
-                                    genreUpdateController.text.trim(),
-                                    durationUpdateController.text.trim(),
-                                    int.parse(bpmUpdateController.text.trim()),
-                                  );
-                                }
-                              },
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.blue),
-                                fixedSize: MaterialStateProperty.all<Size>(
-                                  const Size.fromWidth(380),
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                        titleTextStyle:
+                            TextStyle(backgroundColor: Colors.black),
+                        content: SingleChildScrollView(
+                          child: Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'Название',
+                                  style: TextStyle(letterSpacing: 10),
                                 ),
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16),
+                                TextFormField(
+                                  controller: nameUpdateController,
+                                  // focusNode: nameUpdateNode,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "Название",
+                                    hintStyle: TextStyle(color: Colors.grey),
                                   ),
                                 ),
-                              ),
-                              child: const Text("Изменить"),
+                                Text(
+                                  'Цена',
+                                  style: TextStyle(letterSpacing: 10),
+                                ),
+                                TextFormField(
+                                  controller: priceUpdateController,
+                                  // focusNode: priceUpdateNode,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "Цена",
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                  ),
+                                ),
+                                Text(
+                                  'Тональность',
+                                  style: TextStyle(letterSpacing: 10),
+                                ),
+                                TextFormField(
+                                  controller: keyUpdateController,
+                                  // focusNode: keyUpdateNode,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "Тональность",
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                  ),
+                                ),
+                                Text(
+                                  'Жанр',
+                                  style: TextStyle(letterSpacing: 10),
+                                ),
+                                TextFormField(
+                                  controller: genreUpdateController,
+                                  // focusNode: genreUpdateNode,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "Жанр",
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                  ),
+                                ),
+                                Text(
+                                  'Длительность',
+                                  style: TextStyle(letterSpacing: 10),
+                                ),
+                                TextFormField(
+                                  controller: durationUpdateController,
+                                  // focusNode: durationUpdateNode,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "Длительность",
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                  ),
+                                ),
+                                Text(
+                                  'УВМ',
+                                  style: TextStyle(letterSpacing: 10),
+                                ),
+                                TextFormField(
+                                  controller: bpmUpdateController,
+                                  // focusNode: bpmUpdateNode,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "УВМ",
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                  ),
+                                ),
+                                Text(
+                                  'Инфо',
+                                  style: TextStyle(letterSpacing: 10),
+                                ),
+                                TextFormField(
+                                  controller: infoUpdateController,
+                                  // focusNode: infoUpdateNode,
+                                  decoration: const InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "Инфо",
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    if (nameUpdateController.text.isEmpty ||
+                                        bpmUpdateController.text.isEmpty ||
+                                        durationUpdateController.text.isEmpty ||
+                                        genreUpdateController.text.isEmpty ||
+                                        priceUpdateController.text.isEmpty ||
+                                        keyUpdateController.text.isEmpty ||
+                                        infoUpdateController.text.isEmpty) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (_) => const AlertDialog(
+                                          content: Text('Заполните все поля!'),
+                                        ),
+                                      );
+                                    } else {
+                                      var res =
+                                          await GRaphQLProvider.client.mutate(
+                                        MutationOptions(
+                                            document: gql(productUpdate),
+                                            variables: {
+                                              'name': nameUpdateController.text
+                                                  .trim(),
+                                              'bpm': bpmUpdateController.text
+                                                  .trim(),
+                                              'duration':
+                                                  durationUpdateController.text
+                                                      .trim(),
+                                              'genre': genreUpdateController
+                                                  .text
+                                                  .trim(),
+                                              'price': priceUpdateController
+                                                  .text
+                                                  .trim(),
+                                              'key': keyUpdateController.text
+                                                  .trim(),
+                                              'info': infoUpdateController.text
+                                                  .trim(),
+                                            }),
+                                      );
+                                      querryToSetUpd = sendUpdateMut(
+                                        widget.id_product,
+                                        nameUpdateController.text.trim(),
+                                        int.parse(
+                                            priceUpdateController.text.trim()),
+                                        keyUpdateController.text.trim(),
+                                        infoUpdateController.text.trim(),
+                                        genreUpdateController.text.trim(),
+                                        durationUpdateController.text.trim(),
+                                        int.parse(
+                                            bpmUpdateController.text.trim()),
+                                      );
+                                    }
+                                  },
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.blue),
+                                    fixedSize: MaterialStateProperty.all<Size>(
+                                      const Size.fromWidth(380),
+                                    ),
+                                    shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                    ),
+                                  ),
+                                  child: const Text("Изменить"),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
-                icon: const Icon(CupertinoIcons.square_arrow_up),
-              ),
-              IconButton(
-                onPressed: () async {
-                  await sendDeleteMut(int.tryParse(widget.id_product) ?? 0);
-                  widget.HelpDelete(widget.id_product);
-                },
-                icon: const Icon(CupertinoIcons.delete),
-              ),
-            ]),
+                    );
+                  },
+                  icon: const Icon(CupertinoIcons.square_arrow_up),
+                ),
+                IconButton(
+                  onPressed: () async {
+                    await sendDeleteMut(int.tryParse(widget.id_product) ?? 0);
+                    widget.HelpDelete(widget.id_product);
+                  },
+                  icon: const Icon(CupertinoIcons.delete),
+                ),
+              ]),
+            ),
           ),
         );
       },
@@ -833,387 +842,407 @@ class _ClientPostState extends State<ClientPost> {
           context: context,
           builder: (_) => AlertDialog(
             titleTextStyle: TextStyle(backgroundColor: Colors.black),
-            content: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(
-                  child: Text(
-                    'ФИО: ' +
-                        widget.name +
-                        ' ' +
-                        widget.surname +
-                        ' ' +
-                        widget.patronymic,
+            content: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: Text(
+                      'ФИО: ' +
+                          widget.name +
+                          ' ' +
+                          widget.surname +
+                          ' ' +
+                          widget.patronymic,
+                    ),
                   ),
-                ),
-                Flexible(
-                  child: Text(
-                    'Паспортные данные: ' + widget.passport_series,
+                  Flexible(
+                    child: Text(
+                      'Паспортные данные: ' + widget.passport_series,
+                    ),
                   ),
-                ),
-                Flexible(
-                  child: Text(
-                    'Логин: ' + widget.login,
+                  Flexible(
+                    child: Text(
+                      'Логин: ' + widget.login,
+                    ),
                   ),
-                ),
-                Flexible(
-                  child: Text(
-                    'Почта: ' + widget.mail,
+                  Flexible(
+                    child: Text(
+                      'Почта: ' + widget.mail,
+                    ),
                   ),
-                ),
-                Flexible(
-                  child: Text(
-                    'Телефон: ' + widget.telephone,
+                  Flexible(
+                    child: Text(
+                      'Телефон: ' + widget.telephone,
+                    ),
                   ),
-                ),
-                Flexible(
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (_) => AlertDialog(
-                                titleTextStyle:
-                                    TextStyle(backgroundColor: Colors.black),
-                                content: SingleChildScrollView(
-                                  child: Center(
-                                    child: Container(
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            'Логин',
-                                            style: TextStyle(letterSpacing: 10),
-                                          ),
-                                          TextFormField(
-                                            controller: loginUpdateController,
-                                            // focusNode: nameUpdateNode,
-                                            decoration: const InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: "Логин",
-                                              hintStyle:
-                                                  TextStyle(color: Colors.grey),
+                  Flexible(
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                  titleTextStyle:
+                                      TextStyle(backgroundColor: Colors.black),
+                                  content: SingleChildScrollView(
+                                    child: Center(
+                                      child: Container(
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              'Логин',
+                                              style:
+                                                  TextStyle(letterSpacing: 10),
                                             ),
-                                          ),
-                                          Text(
-                                            'Пароль',
-                                            style: TextStyle(letterSpacing: 10),
-                                          ),
-                                          TextFormField(
-                                            controller:
-                                                passwordUpdateController,
-                                            // focusNode: priceUpdateNode,
-                                            decoration: const InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: "Пароль",
-                                              hintStyle:
-                                                  TextStyle(color: Colors.grey),
-                                            ),
-                                          ),
-                                          Text(
-                                            'Почта',
-                                            style: TextStyle(letterSpacing: 10),
-                                          ),
-                                          TextFormField(
-                                            controller: mailUpdateController,
-                                            // focusNode: keyUpdateNode,
-                                            decoration: const InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: "Почта",
-                                              hintStyle:
-                                                  TextStyle(color: Colors.grey),
-                                            ),
-                                          ),
-                                          Text(
-                                            'Телефон',
-                                            style: TextStyle(
-                                              letterSpacing: 10,
-                                            ),
-                                          ),
-                                          TextFormField(
-                                            keyboardType: TextInputType.number,
-                                            controller:
-                                                telephoneUpdateController,
-                                            inputFormatters: [maskTelephone],
-                                            // focusNode: genreUpdateNode,
-                                            decoration: const InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: "Телефон",
-                                              hintStyle:
-                                                  TextStyle(color: Colors.grey),
-                                            ),
-                                          ),
-                                          Text(
-                                            'Фамилия',
-                                            style: TextStyle(letterSpacing: 10),
-                                          ),
-                                          TextFormField(
-                                            controller: surnameUpdateController,
-                                            // focusNode: durationUpdateNode,
-                                            decoration: const InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: "Фамилия",
-                                              hintStyle:
-                                                  TextStyle(color: Colors.grey),
-                                            ),
-                                          ),
-                                          Text(
-                                            'Имя',
-                                            style: TextStyle(letterSpacing: 10),
-                                          ),
-                                          TextFormField(
-                                            controller: nameUpdateController,
-                                            // focusNode: bpmUpdateNode,
-                                            decoration: const InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: "Имя",
-                                              hintStyle:
-                                                  TextStyle(color: Colors.grey),
-                                            ),
-                                          ),
-                                          Text(
-                                            'Отчество',
-                                            style: TextStyle(letterSpacing: 10),
-                                          ),
-                                          TextFormField(
-                                            controller:
-                                                patronymicUpdateController,
-                                            // focusNode: infoUpdateNode,
-                                            decoration: const InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: "Отчество",
-                                              hintStyle:
-                                                  TextStyle(color: Colors.grey),
-                                            ),
-                                          ),
-                                          Text(
-                                            'Серия паспорта',
-                                            style: TextStyle(letterSpacing: 10),
-                                          ),
-                                          TextFormField(
-                                            keyboardType: TextInputType.number,
-                                            inputFormatters: [
-                                              maskPassportSeries
-                                            ],
-                                            controller:
-                                                passport_seriesUpdateController,
-                                            // focusNode: infoUpdateNode,
-                                            decoration: const InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: "Серия паспорта",
-                                              hintStyle:
-                                                  TextStyle(color: Colors.grey),
-                                            ),
-                                          ),
-                                          Text(
-                                            'Номер паспорта',
-                                            style: TextStyle(letterSpacing: 10),
-                                          ),
-                                          TextFormField(
-                                            keyboardType: TextInputType.number,
-                                            inputFormatters: [
-                                              maskPassportNumber
-                                            ],
-                                            controller:
-                                                passport_numberUpdateController,
-                                            // focusNode: infoUpdateNode,
-                                            decoration: const InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: "Номер паспорта",
-                                              hintStyle:
-                                                  TextStyle(color: Colors.grey),
-                                            ),
-                                          ),
-                                          ElevatedButton(
-                                            onPressed: () async {
-                                              if (loginUpdateController
-                                                      .text.isEmpty ||
-                                                  passwordUpdateController
-                                                      .text.isEmpty ||
-                                                  mailUpdateController
-                                                      .text.isEmpty ||
-                                                  telephoneUpdateController
-                                                      .text.isEmpty ||
-                                                  surnameUpdateController
-                                                      .text.isEmpty ||
-                                                  nameUpdateController
-                                                      .text.isEmpty ||
-                                                  patronymicUpdateController
-                                                      .text.isEmpty ||
-                                                  passport_seriesUpdateController
-                                                      .text.isEmpty ||
-                                                  passport_numberUpdateController
-                                                      .text.isEmpty) {
-                                                showDialog(
-                                                  context: context,
-                                                  builder: (_) =>
-                                                      const AlertDialog(
-                                                    content: Text(
-                                                        'Заполните все поля!'),
-                                                  ),
-                                                );
-                                              } else {
-                                                var res = await GRaphQLProvider
-                                                    .client
-                                                    .mutate(
-                                                  MutationOptions(
-                                                      document:
-                                                          gql(clientUpdate),
-                                                      variables: {
-                                                        'login':
-                                                            loginUpdateController
-                                                                .text
-                                                                .trim(),
-                                                        'password':
-                                                            passwordUpdateController
-                                                                .text
-                                                                .trim(),
-                                                        'mail':
-                                                            mailUpdateController
-                                                                .text
-                                                                .trim(),
-                                                        'telephone':
-                                                            telephoneUpdateController
-                                                                .text
-                                                                .trim(),
-                                                        'surname':
-                                                            surnameUpdateController
-                                                                .text
-                                                                .trim(),
-                                                        'name':
-                                                            nameUpdateController
-                                                                .text
-                                                                .trim(),
-                                                        'patronymic':
-                                                            patronymicUpdateController
-                                                                .text
-                                                                .trim(),
-                                                        'passport_series':
-                                                            passport_seriesUpdateController
-                                                                .text
-                                                                .trim(),
-                                                        'passport_number':
-                                                            passport_numberUpdateController
-                                                                .text
-                                                                .trim(),
-                                                      }),
-                                                );
-                                                querryToSetUpdClient =
-                                                    sendUpdateMut(
-                                                  widget.id_client,
-                                                  loginUpdateController.text
-                                                      .trim(),
-                                                  passwordUpdateController.text
-                                                      .trim(),
-                                                  mailUpdateController.text
-                                                      .trim(),
-                                                  telephoneUpdateController.text
-                                                      .trim(),
-                                                  surnameUpdateController.text
-                                                      .trim(),
-                                                  nameUpdateController.text
-                                                      .trim(),
-                                                  patronymicUpdateController
-                                                      .text
-                                                      .trim(),
-                                                  passport_seriesUpdateController
-                                                      .text
-                                                      .trim(),
-                                                  passport_numberUpdateController
-                                                      .text
-                                                      .trim(),
-                                                );
-                                              }
-                                            },
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all<
-                                                      Color>(Colors.blue),
-                                              fixedSize: MaterialStateProperty
-                                                  .all<Size>(
-                                                const Size.fromWidth(380),
+                                            TextFormField(
+                                              controller: loginUpdateController,
+                                              // focusNode: nameUpdateNode,
+                                              decoration: const InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: "Логин",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey),
                                               ),
-                                              shape: MaterialStateProperty.all(
-                                                RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(16),
+                                            ),
+                                            Text(
+                                              'Пароль',
+                                              style:
+                                                  TextStyle(letterSpacing: 10),
+                                            ),
+                                            TextFormField(
+                                              controller:
+                                                  passwordUpdateController,
+                                              // focusNode: priceUpdateNode,
+                                              decoration: const InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: "Пароль",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey),
+                                              ),
+                                            ),
+                                            Text(
+                                              'Почта',
+                                              style:
+                                                  TextStyle(letterSpacing: 10),
+                                            ),
+                                            TextFormField(
+                                              controller: mailUpdateController,
+                                              // focusNode: keyUpdateNode,
+                                              decoration: const InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: "Почта",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey),
+                                              ),
+                                            ),
+                                            Text(
+                                              'Телефон',
+                                              style: TextStyle(
+                                                letterSpacing: 10,
+                                              ),
+                                            ),
+                                            TextFormField(
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              controller:
+                                                  telephoneUpdateController,
+                                              inputFormatters: [maskTelephone],
+                                              // focusNode: genreUpdateNode,
+                                              decoration: const InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: "Телефон",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey),
+                                              ),
+                                            ),
+                                            Text(
+                                              'Фамилия',
+                                              style:
+                                                  TextStyle(letterSpacing: 10),
+                                            ),
+                                            TextFormField(
+                                              controller:
+                                                  surnameUpdateController,
+                                              // focusNode: durationUpdateNode,
+                                              decoration: const InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: "Фамилия",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey),
+                                              ),
+                                            ),
+                                            Text(
+                                              'Имя',
+                                              style:
+                                                  TextStyle(letterSpacing: 10),
+                                            ),
+                                            TextFormField(
+                                              controller: nameUpdateController,
+                                              // focusNode: bpmUpdateNode,
+                                              decoration: const InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: "Имя",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey),
+                                              ),
+                                            ),
+                                            Text(
+                                              'Отчество',
+                                              style:
+                                                  TextStyle(letterSpacing: 10),
+                                            ),
+                                            TextFormField(
+                                              controller:
+                                                  patronymicUpdateController,
+                                              // focusNode: infoUpdateNode,
+                                              decoration: const InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: "Отчество",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey),
+                                              ),
+                                            ),
+                                            Text(
+                                              'Серия паспорта',
+                                              style:
+                                                  TextStyle(letterSpacing: 10),
+                                            ),
+                                            TextFormField(
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              inputFormatters: [
+                                                maskPassportSeries
+                                              ],
+                                              controller:
+                                                  passport_seriesUpdateController,
+                                              // focusNode: infoUpdateNode,
+                                              decoration: const InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: "Серия паспорта",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey),
+                                              ),
+                                            ),
+                                            Text(
+                                              'Номер паспорта',
+                                              style:
+                                                  TextStyle(letterSpacing: 10),
+                                            ),
+                                            TextFormField(
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              inputFormatters: [
+                                                maskPassportNumber
+                                              ],
+                                              controller:
+                                                  passport_numberUpdateController,
+                                              // focusNode: infoUpdateNode,
+                                              decoration: const InputDecoration(
+                                                border: InputBorder.none,
+                                                hintText: "Номер паспорта",
+                                                hintStyle: TextStyle(
+                                                    color: Colors.grey),
+                                              ),
+                                            ),
+                                            ElevatedButton(
+                                              onPressed: () async {
+                                                if (loginUpdateController.text.isEmpty ||
+                                                    passwordUpdateController
+                                                        .text.isEmpty ||
+                                                    mailUpdateController
+                                                        .text.isEmpty ||
+                                                    telephoneUpdateController
+                                                        .text.isEmpty ||
+                                                    surnameUpdateController
+                                                        .text.isEmpty ||
+                                                    nameUpdateController
+                                                        .text.isEmpty ||
+                                                    patronymicUpdateController
+                                                        .text.isEmpty ||
+                                                    passport_seriesUpdateController
+                                                        .text.isEmpty ||
+                                                    passport_numberUpdateController
+                                                        .text.isEmpty) {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (_) =>
+                                                        const AlertDialog(
+                                                      content: Text(
+                                                          'Заполните все поля!'),
+                                                    ),
+                                                  );
+                                                } else {
+                                                  var res =
+                                                      await GRaphQLProvider
+                                                          .client
+                                                          .mutate(
+                                                    MutationOptions(
+                                                        document:
+                                                            gql(clientUpdate),
+                                                        variables: {
+                                                          'login':
+                                                              loginUpdateController
+                                                                  .text
+                                                                  .trim(),
+                                                          'password':
+                                                              passwordUpdateController
+                                                                  .text
+                                                                  .trim(),
+                                                          'mail':
+                                                              mailUpdateController
+                                                                  .text
+                                                                  .trim(),
+                                                          'telephone':
+                                                              telephoneUpdateController
+                                                                  .text
+                                                                  .trim(),
+                                                          'surname':
+                                                              surnameUpdateController
+                                                                  .text
+                                                                  .trim(),
+                                                          'name':
+                                                              nameUpdateController
+                                                                  .text
+                                                                  .trim(),
+                                                          'patronymic':
+                                                              patronymicUpdateController
+                                                                  .text
+                                                                  .trim(),
+                                                          'passport_series':
+                                                              passport_seriesUpdateController
+                                                                  .text
+                                                                  .trim(),
+                                                          'passport_number':
+                                                              passport_numberUpdateController
+                                                                  .text
+                                                                  .trim(),
+                                                        }),
+                                                  );
+                                                  querryToSetUpdClient =
+                                                      sendUpdateMut(
+                                                    widget.id_client,
+                                                    loginUpdateController.text
+                                                        .trim(),
+                                                    passwordUpdateController
+                                                        .text
+                                                        .trim(),
+                                                    mailUpdateController.text
+                                                        .trim(),
+                                                    telephoneUpdateController
+                                                        .text
+                                                        .trim(),
+                                                    surnameUpdateController.text
+                                                        .trim(),
+                                                    nameUpdateController.text
+                                                        .trim(),
+                                                    patronymicUpdateController
+                                                        .text
+                                                        .trim(),
+                                                    passport_seriesUpdateController
+                                                        .text
+                                                        .trim(),
+                                                    passport_numberUpdateController
+                                                        .text
+                                                        .trim(),
+                                                  );
+                                                }
+                                              },
+                                              style: ButtonStyle(
+                                                backgroundColor:
+                                                    MaterialStateProperty.all<
+                                                        Color>(Colors.blue),
+                                                fixedSize: MaterialStateProperty
+                                                    .all<Size>(
+                                                  const Size.fromWidth(380),
+                                                ),
+                                                shape:
+                                                    MaterialStateProperty.all(
+                                                  RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                  ),
                                                 ),
                                               ),
+                                              child: const Text("Изменить"),
                                             ),
-                                            child: const Text("Изменить"),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                          icon: const Icon(CupertinoIcons.square_arrow_up),
-                        ),
-                        IconButton(
-                          onPressed: () async {
-                            await sendDeleteMutClient(
-                                int.tryParse(widget.id_client) ?? 0);
-                            widget.HelpDelete(widget.id_client);
-                          },
-                          icon: const Icon(CupertinoIcons.delete),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-      child: Container(
-        height: 100,
-        width: 220,
-        margin: EdgeInsets.all(10),
-        padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: Colors.black12,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Row(
-          children: [
-            Flexible(
-              child: Column(
-                children: [
-                  Center(
-                    child: Flexible(
-                      child: Text(
-                        'Почта: ' + widget.mail,
-                        style: TextStyle(color: Colors.white),
+                              );
+                            },
+                            icon: const Icon(CupertinoIcons.square_arrow_up),
+                          ),
+                          IconButton(
+                            onPressed: () async {
+                              await sendDeleteMutClient(
+                                  int.tryParse(widget.id_client) ?? 0);
+                              widget.HelpDelete(widget.id_client);
+                            },
+                            icon: const Icon(CupertinoIcons.delete),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-            Flexible(
-              child: Column(
-                children: [
-                  Text(
-                    'ФИО: ' +
-                        widget.surname +
-                        ' ' +
-                        widget.name +
-                        ' ' +
-                        widget.patronymic,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
+          ),
+        );
+      },
+      child: SingleChildScrollView(
+        child: Container(
+          height: 100,
+          width: 220,
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.black12,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            children: [
+              Flexible(
+                child: Column(
+                  children: [
+                    Center(
+                      child: Flexible(
+                        child: Text(
+                          'Почта: ' + widget.mail,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              Flexible(
+                child: Column(
+                  children: [
+                    Text(
+                      'ФИО: ' +
+                          widget.surname +
+                          ' ' +
+                          widget.name +
+                          ' ' +
+                          widget.patronymic,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -1325,281 +1354,311 @@ class _LicensorPostState extends State<LicensorPost> {
           context: context,
           builder: (_) => AlertDialog(
             titleTextStyle: TextStyle(backgroundColor: Colors.black),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Flexible(
-                  child: Text(
-                    'ФИО: ' +
-                        widget.name +
-                        ' ' +
-                        widget.surname +
-                        ' ' +
-                        widget.patronymic,
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: Text(
+                      'ФИО: ' +
+                          widget.name +
+                          ' ' +
+                          widget.surname +
+                          ' ' +
+                          widget.patronymic,
+                    ),
                   ),
-                ),
-                Flexible(
-                  child: Text(
-                    'Паспортные данные: ' + widget.passport_series,
+                  Flexible(
+                    child: Text(
+                      'Паспортные данные: ' + widget.passport_series,
+                    ),
                   ),
-                ),
-                Flexible(
-                  child: Text(
-                    'Логин: ' + widget.login,
+                  Flexible(
+                    child: Text(
+                      'Логин: ' + widget.login,
+                    ),
                   ),
-                ),
-                Flexible(
-                  child: Text(
-                    'Почта: ' + widget.mail,
+                  Flexible(
+                    child: Text(
+                      'Почта: ' + widget.mail,
+                    ),
                   ),
-                ),
-                Flexible(
-                  child: Text(
-                    'Информация: ' + widget.info,
+                  Flexible(
+                    child: Text(
+                      'Информация: ' + widget.info,
+                    ),
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (_) => AlertDialog(
-                            titleTextStyle:
-                                TextStyle(backgroundColor: Colors.black),
-                            content: Center(
-                              child: Column(
-                                children: [
-                                  Text(
-                                    'Логин',
-                                    style: TextStyle(letterSpacing: 10),
-                                  ),
-                                  TextFormField(
-                                    controller: loginUpdateController,
-                                    // focusNode: nameUpdateNode,
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Логин",
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                    ),
-                                  ),
-                                  Text(
-                                    'Пароль',
-                                    style: TextStyle(letterSpacing: 10),
-                                  ),
-                                  TextFormField(
-                                    controller: passwordUpdateController,
-                                    // focusNode: priceUpdateNode,
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Пароль",
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                    ),
-                                  ),
-                                  Text(
-                                    'Почта',
-                                    style: TextStyle(letterSpacing: 10),
-                                  ),
-                                  TextFormField(
-                                    controller: mailUpdateController,
-                                    // focusNode: keyUpdateNode,
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Почта",
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                    ),
-                                  ),
-                                  Text(
-                                    'Инфо',
-                                    style: TextStyle(letterSpacing: 10),
-                                  ),
-                                  TextFormField(
-                                    controller: infoUpdateController,
-                                    // focusNode: genreUpdateNode,
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Телефон",
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                    ),
-                                  ),
-                                  Text(
-                                    'Фамилия',
-                                    style: TextStyle(letterSpacing: 10),
-                                  ),
-                                  TextFormField(
-                                    controller: surnameUpdateController,
-                                    // focusNode: durationUpdateNode,
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Фамилия",
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                    ),
-                                  ),
-                                  Text(
-                                    'Имя',
-                                    style: TextStyle(letterSpacing: 10),
-                                  ),
-                                  TextFormField(
-                                    controller: nameUpdateController,
-                                    // focusNode: bpmUpdateNode,
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Имя",
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                    ),
-                                  ),
-                                  Text(
-                                    'Отчество',
-                                    style: TextStyle(letterSpacing: 10),
-                                  ),
-                                  TextFormField(
-                                    controller: patronymicUpdateController,
-                                    // focusNode: infoUpdateNode,
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Отчество",
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                    ),
-                                  ),
-                                  Text(
-                                    'Серия паспорта',
-                                    style: TextStyle(letterSpacing: 10),
-                                  ),
-                                  TextFormField(
-                                    controller: passport_seriesUpdateController,
-                                    // focusNode: infoUpdateNode,
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Серия паспорта",
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                    ),
-                                  ),
-                                  Text(
-                                    'Номер паспорта',
-                                    style: TextStyle(letterSpacing: 10),
-                                  ),
-                                  TextFormField(
-                                    controller: passport_numberUpdateController,
-                                    // focusNode: infoUpdateNode,
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Номер паспорта",
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                    ),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () async {
-                                      if (loginUpdateController.text.isEmpty ||
-                                          passwordUpdateController
-                                              .text.isEmpty ||
-                                          mailUpdateController.text.isEmpty ||
-                                          infoUpdateController.text.isEmpty ||
-                                          surnameUpdateController
-                                              .text.isEmpty ||
-                                          nameUpdateController.text.isEmpty ||
-                                          patronymicUpdateController
-                                              .text.isEmpty ||
-                                          passport_seriesUpdateController
-                                              .text.isEmpty ||
-                                          passport_numberUpdateController
-                                              .text.isEmpty) {
-                                        showDialog(
-                                          context: context,
-                                          builder: (_) => const AlertDialog(
-                                            content:
-                                                Text('Заполните все поля!'),
-                                          ),
-                                        );
-                                      } else {
-                                        var res =
-                                            await GRaphQLProvider.client.mutate(
-                                          MutationOptions(
-                                            document: gql(licensorUpdate),
-                                            variables: {
-                                              'login': loginUpdateController
-                                                  .text
-                                                  .trim(),
-                                              'password':
-                                                  passwordUpdateController.text
-                                                      .trim(),
-                                              'mail': mailUpdateController.text
-                                                  .trim(),
-                                              'info': infoUpdateController.text
-                                                  .trim(),
-                                              'surname': surnameUpdateController
-                                                  .text
-                                                  .trim(),
-                                              'name': nameUpdateController.text
-                                                  .trim(),
-                                              'patronymic':
-                                                  patronymicUpdateController
-                                                      .text
-                                                      .trim(),
-                                              'passport_series':
-                                                  passport_seriesUpdateController
-                                                      .text
-                                                      .trim(),
-                                              'passport_number':
-                                                  passport_numberUpdateController
-                                                      .text
-                                                      .trim(),
-                                            },
-                                          ),
-                                        );
-                                        querryToSetUpdLicensor = sendUpdateMut(
-                                          widget.id_licensor,
-                                          loginUpdateController.text.trim(),
-                                          passwordUpdateController.text.trim(),
-                                          mailUpdateController.text.trim(),
-                                          infoUpdateController.text.trim(),
-                                          surnameUpdateController.text.trim(),
-                                          nameUpdateController.text.trim(),
-                                          patronymicUpdateController.text
-                                              .trim(),
-                                          passport_seriesUpdateController.text
-                                              .trim(),
-                                          passport_numberUpdateController.text
-                                              .trim(),
-                                        );
-                                      }
-                                    },
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              Colors.blue),
-                                      fixedSize:
-                                          MaterialStateProperty.all<Size>(
-                                        const Size.fromWidth(380),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              titleTextStyle:
+                                  TextStyle(backgroundColor: Colors.black),
+                              content: SingleChildScrollView(
+                                child: Center(
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        'Логин',
+                                        style: TextStyle(letterSpacing: 10),
                                       ),
-                                      shape: MaterialStateProperty.all(
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
+                                      TextFormField(
+                                        controller: loginUpdateController,
+                                        // focusNode: nameUpdateNode,
+                                        decoration: const InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: "Логин",
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
                                         ),
                                       ),
-                                    ),
-                                    child: const Text("Изменить"),
+                                      Text(
+                                        'Пароль',
+                                        style: TextStyle(letterSpacing: 10),
+                                      ),
+                                      TextFormField(
+                                        controller: passwordUpdateController,
+                                        // focusNode: priceUpdateNode,
+                                        decoration: const InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: "Пароль",
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                        ),
+                                      ),
+                                      Text(
+                                        'Почта',
+                                        style: TextStyle(letterSpacing: 10),
+                                      ),
+                                      TextFormField(
+                                        controller: mailUpdateController,
+                                        // focusNode: keyUpdateNode,
+                                        decoration: const InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: "Почта",
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                        ),
+                                      ),
+                                      Text(
+                                        'Инфо',
+                                        style: TextStyle(letterSpacing: 10),
+                                      ),
+                                      TextFormField(
+                                        controller: infoUpdateController,
+                                        // focusNode: genreUpdateNode,
+                                        decoration: const InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: "Телефон",
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                        ),
+                                      ),
+                                      Text(
+                                        'Фамилия',
+                                        style: TextStyle(letterSpacing: 10),
+                                      ),
+                                      TextFormField(
+                                        controller: surnameUpdateController,
+                                        // focusNode: durationUpdateNode,
+                                        decoration: const InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: "Фамилия",
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                        ),
+                                      ),
+                                      Text(
+                                        'Имя',
+                                        style: TextStyle(letterSpacing: 10),
+                                      ),
+                                      TextFormField(
+                                        controller: nameUpdateController,
+                                        // focusNode: bpmUpdateNode,
+                                        decoration: const InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: "Имя",
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                        ),
+                                      ),
+                                      Text(
+                                        'Отчество',
+                                        style: TextStyle(letterSpacing: 10),
+                                      ),
+                                      TextFormField(
+                                        controller: patronymicUpdateController,
+                                        // focusNode: infoUpdateNode,
+                                        decoration: const InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: "Отчество",
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                        ),
+                                      ),
+                                      Text(
+                                        'Серия паспорта',
+                                        style: TextStyle(letterSpacing: 10),
+                                      ),
+                                      TextFormField(
+                                        controller:
+                                            passport_seriesUpdateController,
+                                        // focusNode: infoUpdateNode,
+                                        decoration: const InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: "Серия паспорта",
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                        ),
+                                      ),
+                                      Text(
+                                        'Номер паспорта',
+                                        style: TextStyle(letterSpacing: 10),
+                                      ),
+                                      TextFormField(
+                                        controller:
+                                            passport_numberUpdateController,
+                                        // focusNode: infoUpdateNode,
+                                        decoration: const InputDecoration(
+                                          border: InputBorder.none,
+                                          hintText: "Номер паспорта",
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                        ),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () async {
+                                          if (loginUpdateController
+                                                  .text.isEmpty ||
+                                              passwordUpdateController
+                                                  .text.isEmpty ||
+                                              mailUpdateController
+                                                  .text.isEmpty ||
+                                              infoUpdateController
+                                                  .text.isEmpty ||
+                                              surnameUpdateController
+                                                  .text.isEmpty ||
+                                              nameUpdateController
+                                                  .text.isEmpty ||
+                                              patronymicUpdateController
+                                                  .text.isEmpty ||
+                                              passport_seriesUpdateController
+                                                  .text.isEmpty ||
+                                              passport_numberUpdateController
+                                                  .text.isEmpty) {
+                                            showDialog(
+                                              context: context,
+                                              builder: (_) => const AlertDialog(
+                                                content:
+                                                    Text('Заполните все поля!'),
+                                              ),
+                                            );
+                                          } else {
+                                            var res = await GRaphQLProvider
+                                                .client
+                                                .mutate(
+                                              MutationOptions(
+                                                document: gql(licensorUpdate),
+                                                variables: {
+                                                  'login': loginUpdateController
+                                                      .text
+                                                      .trim(),
+                                                  'password':
+                                                      passwordUpdateController
+                                                          .text
+                                                          .trim(),
+                                                  'mail': mailUpdateController
+                                                      .text
+                                                      .trim(),
+                                                  'info': infoUpdateController
+                                                      .text
+                                                      .trim(),
+                                                  'surname':
+                                                      surnameUpdateController
+                                                          .text
+                                                          .trim(),
+                                                  'name': nameUpdateController
+                                                      .text
+                                                      .trim(),
+                                                  'patronymic':
+                                                      patronymicUpdateController
+                                                          .text
+                                                          .trim(),
+                                                  'passport_series':
+                                                      passport_seriesUpdateController
+                                                          .text
+                                                          .trim(),
+                                                  'passport_number':
+                                                      passport_numberUpdateController
+                                                          .text
+                                                          .trim(),
+                                                },
+                                              ),
+                                            );
+                                            querryToSetUpdLicensor =
+                                                sendUpdateMut(
+                                              widget.id_licensor,
+                                              loginUpdateController.text.trim(),
+                                              passwordUpdateController.text
+                                                  .trim(),
+                                              mailUpdateController.text.trim(),
+                                              infoUpdateController.text.trim(),
+                                              surnameUpdateController.text
+                                                  .trim(),
+                                              nameUpdateController.text.trim(),
+                                              patronymicUpdateController.text
+                                                  .trim(),
+                                              passport_seriesUpdateController
+                                                  .text
+                                                  .trim(),
+                                              passport_numberUpdateController
+                                                  .text
+                                                  .trim(),
+                                            );
+                                          }
+                                        },
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  Colors.blue),
+                                          fixedSize:
+                                              MaterialStateProperty.all<Size>(
+                                            const Size.fromWidth(380),
+                                          ),
+                                          shape: MaterialStateProperty.all(
+                                            RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                            ),
+                                          ),
+                                        ),
+                                        child: const Text("Изменить"),
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      },
-                      icon: const Icon(CupertinoIcons.square_arrow_up),
-                    ),
-                    IconButton(
-                      onPressed: () async {
-                        await sendDeleteMutLicensor(
-                            int.tryParse(widget.id_licensor) ?? 0);
-                        widget.HelpDelete(widget.id_licensor);
-                      },
-                      icon: const Icon(CupertinoIcons.delete),
-                    ),
-                  ],
-                ),
-              ],
+                          );
+                        },
+                        icon: const Icon(CupertinoIcons.square_arrow_up),
+                      ),
+                      IconButton(
+                        onPressed: () async {
+                          await sendDeleteMutLicensor(
+                              int.tryParse(widget.id_licensor) ?? 0);
+                          widget.HelpDelete(widget.id_licensor);
+                        },
+                        icon: const Icon(CupertinoIcons.delete),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         );
@@ -1675,13 +1734,15 @@ class ErrorRequestPostforClient extends StatelessWidget {
           context: context,
           builder: (_) => AlertDialog(
             titleTextStyle: TextStyle(backgroundColor: Colors.black),
-            content: Row(children: [
-              Flexible(
-                child: Text(
-                  '',
+            content: SingleChildScrollView(
+              child: Row(children: [
+                Flexible(
+                  child: Text(
+                    '',
+                  ),
                 ),
-              ),
-            ]),
+              ]),
+            ),
           ),
         );
       },

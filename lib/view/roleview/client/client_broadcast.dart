@@ -43,10 +43,6 @@ class _client_broadcastState extends State<client_broadcast> {
         child: currentScreen,
         bucket: bucket,
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   child: Icon(Icons.add),
-      //   onPressed: () {},
-      // ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),

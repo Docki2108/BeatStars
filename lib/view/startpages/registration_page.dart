@@ -56,7 +56,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           border: Border.all(
                             color: Colors.blueAccent,
                             width: 1,
-                            strokeAlign: StrokeAlign.center,
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(50.0)),
                         ),

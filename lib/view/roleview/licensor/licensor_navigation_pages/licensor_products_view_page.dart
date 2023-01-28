@@ -100,54 +100,57 @@ class _products_view_pageState extends State<products_view_page> {
         toolbarHeight: 70,
       ),
       backgroundColor: color_soft_blue,
-      body: FutureBuilder(
-        future: GRaphQLProvider.client.query(
-          currentQuery,
+      body: RefreshIndicator(
+        onRefresh: () async {},
+        child: FutureBuilder(
+          future: GRaphQLProvider.client.query(
+            currentQuery,
+          ),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData || snapshot.data == null) {
+              log('Загрузка товаров с API...');
+              return Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    ]),
+              );
+            } else {
+              log('Товары найдены');
+              log(dateNow);
+              productList = (((snapshot.data as QueryResult).data
+                      as Map<String, dynamic>)['product'] as List<Object?>)
+                  .cast<Map<String, dynamic>>();
+              return ListView.builder(
+                itemCount: productList.length,
+                itemBuilder: (context, i) {
+                  return CardPost(
+                    HelpDelete: (id) {
+                      setState(() {
+                        productList.removeWhere(
+                            (element) => element['id_product'] == id);
+                      });
+                    },
+                    id_product: '${productList[i]['id_product']}',
+                    productname: '${productList[i]['name']}',
+                    price: '${productList[i]['price']}',
+                    duration: '${productList[i]['duration']}',
+                    bpm: '${productList[i]['bpm']}',
+                    keyy: '${productList[i]['key']}',
+                    genre: '${productList[i]['genre']}',
+                    info: '${productList[i]['info']}',
+                    image: '${productList[i]['image']}',
+                    publish_date: '${productList[i]['publish_date']}',
+                    music: '${productList[i]['music']}',
+                  );
+                },
+              );
+            }
+          },
         ),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData || snapshot.data == null) {
-            log('Загрузка товаров с API...');
-            return Center(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  ]),
-            );
-          } else {
-            log('Товары найдены');
-            log(dateNow);
-            productList = (((snapshot.data as QueryResult).data
-                    as Map<String, dynamic>)['product'] as List<Object?>)
-                .cast<Map<String, dynamic>>();
-            return ListView.builder(
-              itemCount: productList.length,
-              itemBuilder: (context, i) {
-                return CardPost(
-                  HelpDelete: (id) {
-                    setState(() {
-                      productList.removeWhere(
-                          (element) => element['id_product'] == id);
-                    });
-                  },
-                  id_product: '${productList[i]['id_product']}',
-                  productname: '${productList[i]['name']}',
-                  price: '${productList[i]['price']}',
-                  duration: '${productList[i]['duration']}',
-                  bpm: '${productList[i]['bpm']}',
-                  keyy: '${productList[i]['key']}',
-                  genre: '${productList[i]['genre']}',
-                  info: '${productList[i]['info']}',
-                  image: '${productList[i]['image']}',
-                  publish_date: '${productList[i]['publish_date']}',
-                  music: '${productList[i]['music']}',
-                );
-              },
-            );
-          }
-        },
       ),
     );
   }
