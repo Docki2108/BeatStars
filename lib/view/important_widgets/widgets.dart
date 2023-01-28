@@ -440,31 +440,28 @@ class CardPostforClient extends StatelessWidget {
           }),
         );
 
-    sendMail() async {
-      String username = 'yourname@domain.com';
-      String password = 'abcdefxxxxxxx';
-      String domainSmtp = 'mail.domain.com';
+    // sendMail() async {
+    //   String username = 'yourname@domain.com';
+    //   String password = 'abcdefxxxxxxx';
+    //   String domainSmtp = 'mail.domain.com';
 
-      final smtpServer = SmtpServer(domainSmtp,
-          username: mymail, password: mymailpassword, port: 587);
+    //   final message = Message()
+    //     ..from = Address(username, 'Your name')
+    //     ..recipients.add('tematerbi@mail.ru')
+    //     ..subject = 'Dart Mailer library :: 😀 :: ${DateTime.now()}'
+    //     ..text = 'This is the plain text.\nThis is line 2 of the text part.'
+    //     ..html = "<h1>Shawon</h1>\n<p>Hey! Here's some HTML content</p>";
 
-      final message = Message()
-        ..from = Address(username, 'Your name')
-        ..recipients.add('tematerbi@mail.ru')
-        ..subject = 'Dart Mailer library :: 😀 :: ${DateTime.now()}'
-        ..text = 'This is the plain text.\nThis is line 2 of the text part.'
-        ..html = "<h1>Shawon</h1>\n<p>Hey! Here's some HTML content</p>";
-
-      try {
-        final sendReport = await send(message, smtpServer);
-        log('Message sent: ' + sendReport.toString());
-      } on MailerException catch (e) {
-        log('Message not sent.');
-        for (var p in e.problems) {
-          log('Problem: ${p.code}: ${p.msg}');
-        }
-      }
-    }
+    //   try {
+    //     final sendReport = await send(message, smtpServer);
+    //     log('Message sent: ' + sendReport.toString());
+    //   } on MailerException catch (e) {
+    //     log('Message not sent.');
+    //     for (var p in e.problems) {
+    //       log('Problem: ${p.code}: ${p.msg}');
+    //     }
+    //   }
+    // }
 
     return InkWell(
       onTap: () {
@@ -544,7 +541,7 @@ class CardPostforClient extends StatelessWidget {
                             child: Text('Купить'),
                             onPressed: () {
                               log(productname);
-                              sendMail();
+                              // sendMail();
                             },
                           ),
                         ],
